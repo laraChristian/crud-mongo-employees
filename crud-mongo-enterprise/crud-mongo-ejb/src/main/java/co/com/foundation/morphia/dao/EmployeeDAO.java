@@ -6,6 +6,8 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mongodb.morphia.query.Query;
 
 import co.com.foundation.morphia.domain.EmployeeRequest;
@@ -20,35 +22,43 @@ import co.com.foundation.morphia.persistence.MongoConnection;
 @LocalBean
 public class EmployeeDAO implements Persistence<EmployeeRequest, Employee> {
 
+	private final Logger LOGGER = LogManager.getLogger(EmployeeDAO.class);
+
 	@EJB
 	private MongoConnection connection;
 
 	@Override
-	public void create(EmployeeRequest request) {
-		// TODO Auto-generated method stub
-
+	public void create(EmployeeRequest request) throws PersistenceException {
+		try {
+			LOGGER.info("start -- create method");
+		} catch (Exception e) {
+			throw new PersistenceException(e.getMessage(), e);
+		} finally {
+			LOGGER.info("end -- create method");
+		}
 	}
 
 	@Override
 	public List<Employee> listAll() throws PersistenceException {
 		try {
-			/*
-			 * connection.getDataStore().find(Employee.class).project(
-			 * "firstName", true).project("lastName", true) .project("email",
-			 * true).project("phoneNumber", true).project("hireDate", true)
-			 * .project("identification", true).project("manager",
-			 * true).project("job", true).proje;
-			 */
+			LOGGER.info("start -- list-all method");
 			return null;
 		} catch (Exception e) {
 			throw new PersistenceException(e);
+		} finally {
+			LOGGER.info("end -- list-all method");
 		}
 	}
 
 	@Override
-	public void update(EmployeeRequest request) {
-		// TODO Auto-generated method stub
-
+	public void update(EmployeeRequest request) throws PersistenceException {
+		try {
+			LOGGER.info("start -- update method");
+		} catch (Exception e) {
+			throw new PersistenceException(e.getMessage(), e);
+		} finally {
+			LOGGER.info("end -- update method");
+		}
 	}
 
 	@Override
