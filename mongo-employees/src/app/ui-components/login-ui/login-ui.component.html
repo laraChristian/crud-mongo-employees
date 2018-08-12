@@ -1,0 +1,27 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<div class="center-loggin-div">
+    <p-panel>
+        <p-header>
+            Header content here
+        </p-header>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <input type="text" pInputText [(ngModel)]="_model.request.user.userName" style="width: 100%" />
+            </div>
+            <hr>
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <input style="width: 100%" type="password" pPassword placeholder="Password" [(ngModel)]="_model.request.user.password" />
+            </div>
+        </div>
+        <p-footer>
+            <div class="ui-g">
+                <div class="ui-g-6 ui-md-6 ui-lg-6">
+                    <button pButton type="button" icon="fa fa-check-circle" style="width: 100%" label="Submit" (click)="login()" class="ui-button-rounded"></button>
+                </div>
+                <div class="ui-g-6 ui-md-6 ui-lg-6">
+                    <button pButton type="button" icon="fa fa-recycle" style="width: 100%" label="Clean" (click)="_model.clean()" class="ui-button-rounded  ui-button-danger"></button>
+                </div>
+            </div>
+        </p-footer>
+    </p-panel>
+</div>

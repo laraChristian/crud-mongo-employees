@@ -1,0 +1,45 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<div class="ui-g">
+  <div class="ui-g-12 ui-md-12 ui-lg-12">
+    <p-panel>
+      <p-header>
+        Enter region data -- Regions management center
+      </p-header>
+      <p-footer>
+        <div class="ui-g">
+          <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <form [formGroup]="_model.regionForm" (ngSubmit)="onSubmit(_model.regionForm.value)">
+
+              <div class="ui-g-12 ui-md-12 ui-lg-6">
+                <input pInputText type="text" pTooltip="Region name" placeholder="Right" tooltipEvent="focus" formControlName="name" placeholder="Region name"
+                  style="width: 100%; height: 26px;">
+                <div class="alert rounded-corners" *ngIf="!_model.regionForm.controls['name'].valid&&_model.regionForm.controls['name'].dirty">
+                  <i class="fa fa-info-circle">
+                    Region name is requerid!
+                  </i>
+                </div>
+              </div>
+
+              <div class="ui-g-12 ui-md-12 ui-lg-6" style="text-align: center">
+                <div style="width: 100%">
+                  <button pButton type="submit" class="ui-button-raised" label="Submit" [disabled]="!_model.regionForm.valid" style="width: 90%"></button>
+                  <hr style="width: 80%; margin: 2% auto">
+                </div>
+
+                <div tyle="width: 100%">
+                  <button pButton type="button" class="ui-button-danger ui-button-raised" style="width: 90%" label="Delete"></button>
+                  <hr style="width: 80%; margin: 2% auto">
+                </div>
+
+                <div tyle="width: 100%">
+                  <button pButton type="button" class="ui-button-secondary ui-button-raised" style="width: 90%" label="Clean" (click)="_model.clean()"></button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </p-footer>
+    </p-panel>
+  </div>
+</div>
