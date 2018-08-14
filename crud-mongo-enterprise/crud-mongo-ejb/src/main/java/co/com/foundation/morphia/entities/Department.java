@@ -9,7 +9,7 @@ import org.mongodb.morphia.annotations.Reference;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity(value = "departments")
+@Entity("departments")
 @Getter
 @Setter
 public class Department {
@@ -18,11 +18,11 @@ public class Department {
 	private ObjectId id;
 	@Property(value = "name")
 	private String name;
-	@Reference(value = "manager", idOnly = true, ignoreMissing = true)
+	@Reference(value = "manager", lazy = true, ignoreMissing = true)
 	private Employee manager;
-	@Reference(value = "location", idOnly = true)
+	@Reference(value = "location", lazy = true, ignoreMissing = true)
 	private Locations location;
-	
+
 	public Department() {
 		super();
 	}

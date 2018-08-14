@@ -35,9 +35,13 @@ export class ServiceUtils {
 }
 
 export enum Apis {
-    EMPLOYEES_API = '/employees-api'
+    EMPLOYEES_API = '/employees-api',
+    REGIONS_API = '/regions-api'
 }
 
 export enum Resources {
-    LOGIN = '/login'
+    LOGIN = '/login',
+    CREATE_REGION = '/create-update-region',
+    LIST_REGIONS = '/list-regions',
+    DELETE_REGION = '/delete-region'
 }

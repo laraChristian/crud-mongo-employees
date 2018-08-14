@@ -7,9 +7,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import co.com.foundation.morphia.dao.EmployeeDAO;
-import co.com.foundation.morphia.domain.LoginRequest;
 import co.com.foundation.morphia.entities.User;
 import co.com.foundation.morphia.exceptions.PersistenceException;
+import co.com.foundation.morphia.messages.LoginRequest;
 
 @Stateless
 public class SystemFacade {

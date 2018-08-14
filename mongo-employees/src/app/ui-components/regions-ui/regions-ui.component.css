@@ -10,3 +10,8 @@
     -moz-border-radius: 10px;
     border-radius: 10px;
 }
+
+.ui-datatable .ui-state-highlight {
+    background-image: none;
+    background-color: green !important;
+}

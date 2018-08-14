@@ -11,9 +11,9 @@ import javax.ws.rs.core.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import co.com.foundation.morphia.domain.LoginRequest;
-import co.com.foundation.morphia.domain.LoginResponse;
-import co.com.foundation.morphia.domain.LoginResponse.LoginResponseBuilder;
+import co.com.foundation.morphia.messages.LoginRequest;
+import co.com.foundation.morphia.messages.LoginResponse;
+import co.com.foundation.morphia.messages.LoginResponse.LoginResponseBuilder;
 import co.com.foundation.morphia.exceptions.InvalidCredentialsException;
 import co.com.foundation.morphia.exceptions.PersistenceException;
 import co.com.foundation.morphia.facade.SystemFacade;

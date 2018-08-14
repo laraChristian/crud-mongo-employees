@@ -23,7 +23,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- -->
+		<!-- Mongo -->
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>

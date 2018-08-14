@@ -1,4 +1,4 @@
-package co.com.foundation.morphia.domain;
+package co.com.foundation.morphia.messages;
 
 import java.util.List;
 

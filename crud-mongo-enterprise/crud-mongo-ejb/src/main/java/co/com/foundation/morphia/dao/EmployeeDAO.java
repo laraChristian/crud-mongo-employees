@@ -10,15 +10,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mongodb.morphia.query.Query;
 
-import co.com.foundation.morphia.domain.EmployeeRequest;
-import co.com.foundation.morphia.domain.LoginRequest;
 import co.com.foundation.morphia.entities.Employee;
 import co.com.foundation.morphia.entities.User;
 import co.com.foundation.morphia.exceptions.InvalidCredentialsException;
 import co.com.foundation.morphia.exceptions.PersistenceException;
+import co.com.foundation.morphia.messages.EmployeeRequest;
+import co.com.foundation.morphia.messages.LoginRequest;
 import co.com.foundation.morphia.persistence.MongoConnection;
 
-@Stateless(name = "EmployeeDAO")
+@Stateless
 @LocalBean
 public class EmployeeDAO implements Persistence<EmployeeRequest, Employee> {
 

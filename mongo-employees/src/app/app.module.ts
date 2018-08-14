@@ -17,6 +17,7 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
+import {TableModule} from 'primeng/table';
 
 //session
 import { LocalStorageModule } from 'angular-2-local-storage';
@@ -55,7 +56,8 @@ import { RegionsUiComponent } from './ui-components/regions-ui/regions-ui.compon
     PasswordModule,
     ButtonModule,
     ToastModule,
-    TooltipModule
+    TooltipModule,
+    TableModule
   ],
   providers: [SessionService, LogginGuard, AuthGuard, MessageService],
   bootstrap: [AppComponent]

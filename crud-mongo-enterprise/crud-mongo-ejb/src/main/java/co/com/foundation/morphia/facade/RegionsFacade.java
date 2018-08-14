@@ -9,22 +9,26 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import co.com.foundation.morphia.dao.Persistence;
-import co.com.foundation.morphia.domain.RegionRequest;
-import co.com.foundation.morphia.entities.Region;
+import co.com.foundation.morphia.domain.Region;
 import co.com.foundation.morphia.exceptions.PersistenceException;
+import co.com.foundation.morphia.messages.RegionRequest;
 
 @Stateless(name = "RegionsFacade")
 public class RegionsFacade implements ModulesFacade<RegionRequest, Region> {
 
 	private final Logger LOGGER = LogManager.getLogger(RegionsFacade.class);
 
-	@EJB(beanName = "RegionsPersistence")
+	@EJB(beanName = "RegionsDAO")
 	private Persistence<RegionRequest, Region> persistence;
 
 	@Override
-	public void create(RegionRequest request) {
-		// TODO Auto-generated method stub
-
+	public void create(RegionRequest request) throws PersistenceException {
+		try {
+			LOGGER.info("start -- create method");
+			persistence.create(request);
+		} finally {
+			LOGGER.info("end -- create method");
+		}
 	}
 
 	@Override
@@ -38,15 +42,23 @@ public class RegionsFacade implements ModulesFacade<RegionRequest, Region> {
 	}
 
 	@Override
-	public void update(RegionRequest reuqest) {
-		// TODO Auto-generated method stub
-
+	public void update(RegionRequest request) throws PersistenceException {
+		try {
+			LOGGER.info("start -- update method");
+			persistence.update(request);
+		} finally {
+			LOGGER.info("end -- update method");
+		}
 	}
 
 	@Override
-	public void delete(RegionRequest request) {
-		// TODO Auto-generated method stub
-
+	public void delete(RegionRequest request) throws PersistenceException {
+		try {
+			LOGGER.info("start -- delete method for:{}", request.getRegion().getId());
+			persistence.delete(request);
+		} finally {
+			LOGGER.info("end -- delete method for:{}", request.getRegion().getId());
+		}
 	}
 
 }

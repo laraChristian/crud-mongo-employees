@@ -8,7 +8,7 @@ import org.mongodb.morphia.annotations.Property;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity(value = "jobs")
+@Entity("jobs")
 @Getter
 @Setter
 public class Job {

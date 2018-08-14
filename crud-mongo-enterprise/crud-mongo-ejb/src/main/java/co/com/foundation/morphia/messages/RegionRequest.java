@@ -1,6 +1,6 @@
-package co.com.foundation.morphia.domain;
+package co.com.foundation.morphia.messages;
 
-import co.com.foundation.morphia.entities.Region;
+import co.com.foundation.morphia.domain.Region;
 import lombok.Getter;
 
 @Getter

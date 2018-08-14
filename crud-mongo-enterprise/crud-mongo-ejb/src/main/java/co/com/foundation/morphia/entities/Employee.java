@@ -12,7 +12,7 @@ import org.mongodb.morphia.annotations.Reference;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity(value = "employees")
+@Entity("employees")
 @Getter
 @Setter
 public class Employee {
@@ -31,11 +31,11 @@ public class Employee {
 	private Date hireDate;
 	@Property(value = "identification")
 	private String identification;
-	@Reference(value = "manager", idOnly = true)
+	@Reference(value = "manager", lazy = true, ignoreMissing = true)
 	private Employee manager;
-	@Reference(value = "job", idOnly = true)
+	@Reference(value = "job", lazy = true, ignoreMissing = true)
 	private Job job;
-	@Reference(value = "department", idOnly = true)
+	@Reference(value = "department", lazy = true, ignoreMissing = true)
 	private Department department;
 
 	public Employee() {

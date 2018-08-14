@@ -1,6 +1,6 @@
 export class Region {
 
-    id: any;
+    id: String;
     name: String;
 
 }

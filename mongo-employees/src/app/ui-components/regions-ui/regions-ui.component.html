@@ -5,40 +5,74 @@
       <p-header>
         Enter region data -- Regions management center
       </p-header>
-      <p-footer>
-        <div class="ui-g">
-          <div class="ui-g-12 ui-md-12 ui-lg-12">
-            <form [formGroup]="_model.regionForm" (ngSubmit)="onSubmit(_model.regionForm.value)">
 
-              <div class="ui-g-12 ui-md-12 ui-lg-6">
-                <input pInputText type="text" pTooltip="Region name" placeholder="Right" tooltipEvent="focus" formControlName="name" placeholder="Region name"
-                  style="width: 100%; height: 26px;">
-                <div class="alert rounded-corners" *ngIf="!_model.regionForm.controls['name'].valid&&_model.regionForm.controls['name'].dirty">
-                  <i class="fa fa-info-circle">
-                    Region name is requerid!
-                  </i>
-                </div>
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+          <form [formGroup]="_model.regionForm" (ngSubmit)="onSubmit(_model.regionForm.value)">
+
+            <div class="ui-g-12 ui-md-12 ui-lg-6">
+              <input pInputText type="text" pTooltip="Region name" placeholder="Right" tooltipEvent="focus" formControlName="name" placeholder="Region name"
+                style="width: 100%; height: 26px;">
+              <div class="alert rounded-corners" *ngIf="!_model.regionForm.controls['name'].valid&&_model.regionForm.controls['name'].dirty">
+                <i class="fa fa-info-circle">
+                  Region name is requerid!
+                </i>
+              </div>
+            </div>
+
+            <div class="ui-g-12 ui-md-12 ui-lg-6" style="text-align: center">
+              <div style="width: 100%">
+                <button pButton type="submit" class="ui-button-raised" label="Submit" [disabled]="!_model.regionForm.valid" style="width: 90%"></button>
+                <hr style="width: 80%; margin: 2% auto">
               </div>
 
-              <div class="ui-g-12 ui-md-12 ui-lg-6" style="text-align: center">
-                <div style="width: 100%">
-                  <button pButton type="submit" class="ui-button-raised" label="Submit" [disabled]="!_model.regionForm.valid" style="width: 90%"></button>
-                  <hr style="width: 80%; margin: 2% auto">
-                </div>
-
-                <div tyle="width: 100%">
-                  <button pButton type="button" class="ui-button-danger ui-button-raised" style="width: 90%" label="Delete"></button>
-                  <hr style="width: 80%; margin: 2% auto">
-                </div>
-
-                <div tyle="width: 100%">
-                  <button pButton type="button" class="ui-button-secondary ui-button-raised" style="width: 90%" label="Clean" (click)="_model.clean()"></button>
-                </div>
+              <div style="width: 100%">
+                <button pButton type="button" class="ui-button-danger ui-button-raised" [disabled]="_model.enableDelete" style="width: 90%"
+                  label="Delete" (click)="deleteRegion()"></button>
+                <hr style="width: 80%; margin: 2% auto">
               </div>
 
-            </form>
-          </div>
+              <div style="width: 100%">
+                <button pButton type="button" class="ui-button-secondary ui-button-raised" style="width: 90%" label="Clean" (click)="_model.clean()"></button>
+              </div>
+            </div>
+
+          </form>
         </div>
+      </div>
+
+      <p-footer>
+        <p-table styleClass="ui-datatable ui-state-highlight" [columns]="_model.cols" [value]="_model.regions" [(selection)]="_model.request.region" (onRowSelect)="onRowSelect()"
+          (onRowUnselect)="_model.clean()" [responsive]="true">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th style="width: 20%">
+                Select
+              </th>
+              <th *ngFor="let col of columns">
+                {{col.header}}
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+              <td>
+                <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
+              </td>
+              <td *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
+                {{rowData[col.field]}}
+              </td>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="summary">
+            <div style="text-align: left">
+
+            </div>
+          </ng-template>
+        </p-table>
       </p-footer>
     </p-panel>
   </div>

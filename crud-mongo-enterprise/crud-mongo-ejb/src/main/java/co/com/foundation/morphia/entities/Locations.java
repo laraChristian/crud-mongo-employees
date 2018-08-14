@@ -24,7 +24,7 @@ public class Locations {
 	private String city;
 	@Property(value = "stateProvince")
 	private String stateProvince;
-	@Reference(value = "country", idOnly = true)
+	@Reference(value = "country", lazy = true, ignoreMissing = true)
 	private Country country;
 
 	public Locations() {
