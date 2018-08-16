@@ -6,6 +6,8 @@ import { Http } from '@angular/http';
 import { map, catchError } from 'rxjs/operators'
 import { Observable } from 'rxjs';
 import { RegionResponse } from '../domain/regionResponse';
+import { CountryRequest } from '../domain/countryRequest';
+import { CountryResponse } from '../domain/countryResponse';
 
 const API_BASE = environment.apiUrl;
 
@@ -40,7 +42,6 @@ export class RegionService extends ServiceUtils {
     }, catchError((error: any) => Observable.throw(error))));
   }
 
-
   public deleteRegion(request: RegionRequest): Observable<RegionResponse> {
     return this._http.post(API_BASE + Apis.REGIONS_API + Resources.DELETE_REGION, request, this.options).pipe(map(resp => {
       if (resp.ok == true) {
@@ -49,5 +50,35 @@ export class RegionService extends ServiceUtils {
         throw new Error(resp.statusText);
       }
     }, catchError((error: any) => Observable.throw(error))));
+  }
+
+  public createCountry(request: CountryRequest): Observable<CountryResponse> {
+    return this._http.post(API_BASE + Apis.COUNTRIES_API + Resources.CREATE_COUNTRY, request, this.options).pipe(map(resp => {
+      if (resp.status == 200 || resp.status == 202) {
+        return resp.json();
+      } else {
+        throw new Error(resp.statusText);
+      }
+    }), catchError((error: any) => Observable.throw(error)));
+  }
+
+  public listCountries(): Observable<CountryResponse> {
+    return this._http.get(API_BASE + Apis.COUNTRIES_API + Resources.LIST_COUNTRIES, this.options).pipe(map(resp => {
+      if (resp.ok == true) {
+        return resp.json();
+      } else {
+        throw new Error(resp.statusText);
+      }
+    }, catchError((error: any) => Observable.throw(error))))
+  }
+
+  public deleteCountry(request: CountryRequest): Observable<CountryResponse> {
+    return this._http.post(API_BASE + Apis.COUNTRIES_API + Resources.DELETE_COUNTRY, request, this.options).pipe(map(resp => {
+      if (resp.status == 200 || resp.status == 202) {
+        return resp.json();
+      } else {
+        throw new Error(resp.statusText);
+      }
+    }), catchError((error: any) => Observable.throw(error)));
   }
 }

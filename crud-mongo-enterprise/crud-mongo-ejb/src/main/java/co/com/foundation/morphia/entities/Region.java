@@ -31,4 +31,9 @@ public class Region {
 		super();
 	}
 
+	public Region(ObjectId id) {
+		super();
+		this.id = id;
+	}
+
 }

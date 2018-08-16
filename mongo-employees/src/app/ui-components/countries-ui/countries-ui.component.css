@@ -1,0 +1,16 @@
+.alert {
+    padding: 10px;
+    background-color: #f44336;
+    color: white;
+    width: 100%;
+}
+
+.rounded-corners{
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.beige-background{
+    background-color: rgb(245, 243, 192);
+}

@@ -41,4 +41,20 @@ public class Employee {
 	public Employee() {
 		super();
 	}
+
+	public Employee(ObjectId id, String firstName, String lastName, Email email, String phoneNumber, Date hireDate,
+			String identification, Employee manager, Job job, Department department) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.hireDate = hireDate;
+		this.identification = identification;
+		this.manager = manager;
+		this.job = job;
+		this.department = department;
+	}
+
 }

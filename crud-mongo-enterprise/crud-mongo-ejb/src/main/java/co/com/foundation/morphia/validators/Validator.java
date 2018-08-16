@@ -9,7 +9,8 @@ import co.com.foundation.morphia.exceptions.PersistenceException;
 @Local
 public interface Validator {
 
-	boolean nameAlReadyExist(final ObjectId id, final String name) throws PersistenceException;
+	<T> boolean nameAlReadyExist(final ObjectId id, final String name, Class<T> className) throws PersistenceException;
 
-	boolean isAssigned(final ObjectId id) throws PersistenceException;
+	<P, C> boolean isAssigned(final ObjectId id, final Class<P> parentClass, final Class<C> childClass, final String fieldFilter)
+			throws PersistenceException;
 }

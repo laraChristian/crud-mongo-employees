@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
 
+import co.com.foundation.morphia.entities.Country;
 import co.com.foundation.morphia.entities.Region;
 import co.com.foundation.morphia.exceptions.AvailabilityException;
 import co.com.foundation.morphia.exceptions.DuplicateNameException;
@@ -21,7 +22,6 @@ import co.com.foundation.morphia.messages.RegionRequest;
 import co.com.foundation.morphia.persistence.MongoConnection;
 import co.com.foundation.morphia.types.ComponentType;
 import co.com.foundation.morphia.validators.Validator;
-import co.com.foundation.morphia.validators.annotation.Validators;
 
 @Stateless(name = "RegionsDAO")
 public class RegionsDAO implements Persistence<RegionRequest, co.com.foundation.morphia.domain.Region> {
@@ -31,8 +31,7 @@ public class RegionsDAO implements Persistence<RegionRequest, co.com.foundation.
 	@EJB
 	private MongoConnection connection;
 
-	@Inject
-	@Validators(type = ComponentType.REGION)
+	@EJB(beanName = "CommonValidator")
 	private Validator validator;
 
 	@Inject
@@ -46,7 +45,7 @@ public class RegionsDAO implements Persistence<RegionRequest, co.com.foundation.
 			co.com.foundation.morphia.domain.Region region = request.getRegion();
 
 			if (validator.nameAlReadyExist(region.getId() != null ? new ObjectId(region.getId()) : null,
-					region.getName())) {
+					region.getName(), Region.class)) {
 				throw new DuplicateNameException("This name already assigned to another region");
 			}
 
@@ -80,7 +79,7 @@ public class RegionsDAO implements Persistence<RegionRequest, co.com.foundation.
 		try {
 			LOGGER.info("start -- update method for:{}", request.getRegion().getId());
 			co.com.foundation.morphia.domain.Region region = request.getRegion();
-			if (validator.nameAlReadyExist(new ObjectId(region.getId()), region.getName())) {
+			if (validator.nameAlReadyExist(new ObjectId(region.getId()), region.getName(), Region.class)) {
 				throw new DuplicateNameException("This name already assigned to another region");
 			}
 			connection.getDataStore().merge(mapper.map(region));
@@ -98,9 +97,9 @@ public class RegionsDAO implements Persistence<RegionRequest, co.com.foundation.
 		try {
 			LOGGER.info("start -- delete method for:{}", request.getRegion().getId());
 			co.com.foundation.morphia.domain.Region region = request.getRegion();
-			if (validator.isAssigned(new ObjectId(region.getId()))) {
+			if (validator.isAssigned(new ObjectId(region.getId()), Region.class, Country.class, "region")) {
 				throw new AvailabilityException(
-						"the Americas region was found in multiple countries, this should be unassigned to can be delete");
+						"The region was found in multiple countries, this should be unassigned to can be delete");
 			}
 			connection.getDataStore().delete(mapper.map(region));
 		} catch (AvailabilityException e) {

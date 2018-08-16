@@ -18,7 +18,12 @@ export class BaseMenuComponent implements OnInit {
 
   ngOnInit() {
     this._items = [{ label: 'Users', icon: 'fa fa-users', routerLink: 'users-ui' },
-    { label: 'Regions', icon: 'fa fa-adn', routerLink: 'regions-ui' }]
+    {
+      label: 'Regions', icon: 'fa fa-ra', items: [
+        { label: 'Regions', icon: 'fa fa-adn', routerLink: 'regions-ui' },
+        { label: 'Countries', icon: 'fa fa-shirtsinbulk', routerLink: 'countries-ui' }
+      ]
+    }]
   }
 
   private showToLoggedUsers(): boolean {

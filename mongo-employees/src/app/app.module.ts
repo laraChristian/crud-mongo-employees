@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { LoginUiComponent } from './ui-components/login-ui/login-ui.component';
 import { UsersUiComponent } from './ui-components/users-ui/users-ui.component';
 import { BaseMenuComponent } from './ui-components/base-menu/base-menu.component';
+import { RegionsUiComponent } from './ui-components/regions-ui/regions-ui.component';
+import { CountriesUiComponent } from './ui-components/countries-ui/countries-ui.component';
 
 //prime modules
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,7 +19,10 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
-import {TableModule} from 'primeng/table';
+import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown';
+import { MessageModule } from 'primeng/message';
+import { AccordionModule } from 'primeng/accordion';   
 
 //session
 import { LocalStorageModule } from 'angular-2-local-storage';
@@ -27,7 +32,6 @@ import { AuthGuard } from './security/auth-guard';
 import { routing } from './routing-conf/app-routes';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
-import { RegionsUiComponent } from './ui-components/regions-ui/regions-ui.component';
 
 
 @NgModule({
@@ -36,11 +40,13 @@ import { RegionsUiComponent } from './ui-components/regions-ui/regions-ui.compon
     LoginUiComponent,
     UsersUiComponent,
     BaseMenuComponent,
-    RegionsUiComponent
+    RegionsUiComponent,
+    CountriesUiComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AccordionModule,
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
@@ -57,7 +63,9 @@ import { RegionsUiComponent } from './ui-components/regions-ui/regions-ui.compon
     ButtonModule,
     ToastModule,
     TooltipModule,
-    TableModule
+    TableModule,
+    DropdownModule,
+    MessageModule
   ],
   providers: [SessionService, LogginGuard, AuthGuard, MessageService],
   bootstrap: [AppComponent]

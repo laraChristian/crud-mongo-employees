@@ -26,7 +26,6 @@ export class RegionModel {
     }
 
     initForm() {
-
         this.regionForm = this._formGroup.group({ 'id': new FormControl('', Validators.nullValidator), 'name': new FormControl('', Validators.required) });
     }
 

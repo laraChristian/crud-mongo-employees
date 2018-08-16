@@ -1,0 +1,103 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<div class="ui-g">
+  <div class="ui-g-12 ui-md-12 ui-lg-12">
+    <p-panel>
+
+      <p-header>
+        Enter country data -- Countries management center
+      </p-header>
+
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-12 ui-lg-12 beige-background rounded-corners">
+          <form [formGroup]="_model.countryForm" (ngSubmit)="onSubmit(_model.countryForm.value)">
+
+            <div class="ui-g-12 ui-md-12 ui-lg-6">
+              <div class="ui-g-12 ui-md-6 ui-lg-6">
+                <input pInputText type="text" pTooltip="Country Name" placeholder="Right" tooltipEvent="focus" formControlName="name" placeholder="Requerid"
+                  style="width: 100%; height: 34px;">
+                <div class="alert rounded-corners" *ngIf="!_model.countryForm.controls['name'].valid&&_model.countryForm.controls['name'].dirty">
+                  <i class="fa fa-info-circle">
+                    Country name is requerid!
+                  </i>
+                </div>
+              </div>
+
+              <div class="ui-g-12 ui-md-6 ui-lg-6">
+                <p-dropdown [style]="{'width':'100%'}" [options]="_model.regionsItems" formControlName="regionId" filter="true" [(ngModel)]="_model.request.country.regionId">
+                  <ng-template let-item pTemplate="selectedItem">
+                    <span style="vertical-align:middle">{{item.label}}</span>
+                  </ng-template>
+                  <ng-template let-region pTemplate="item">
+                    <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                      <div style="font-size:14px;float:right;margin-top:4px">{{region.label}}</div>
+                    </div>
+                  </ng-template>
+                </p-dropdown>
+                <div class="alert rounded-corners" *ngIf="!_model.countryForm.controls['regionId'].valid&&_model.countryForm.controls['regionId'].dirty">
+                  <i class="fa fa-info-circle">
+                    Region is requerid!
+                  </i>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g-12 ui-md-12 ui-lg-6" style="text-align: center">
+              <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <button pButton type="submit" icon="fa fa-cloud-upload" class="ui-button-raised" label="Submit" [disabled]="!_model.countryForm.valid"
+                  style="width: 100%"></button>
+                <hr style="width: 80%; margin: 2% auto">
+              </div>
+
+              <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <button pButton type="button" icon="fa fa-minus-circle" class="ui-button-danger ui-button-raised" [disabled]="_model.enableDelete"
+                  style="width: 100%" label="Delete" (click)="delete()"></button>
+                <hr style="width: 80%; margin: 2% auto">
+              </div>
+
+              <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <button pButton type="button" icon="fa fa-eraser" class="ui-button-secondary ui-button-raised" style="width: 100%" label="Clean"
+                  (click)="_model.clean()"></button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <p-footer>
+        <p-table [columns]="_model.countryCols" [value]="_model.countries" [(selection)]="_model.request.country" [responsive]="true"
+          (onRowSelect)="onRowSelect()" (onRowUnselect)="_model.clean()">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th style="width: 20%">
+                Select
+              </th>
+              <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+              <td>
+                <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
+              </td>
+              <td *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
+                {{rowData[col.field]}}
+              </td>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="summary">
+            <div style="text-align: left">
+
+            </div>
+          </ng-template>
+        </p-table>
+      </p-footer>
+    </p-panel>
+  </div>
+</div>
