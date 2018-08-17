@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { RegionResponse } from '../domain/regionResponse';
 import { CountryRequest } from '../domain/countryRequest';
 import { CountryResponse } from '../domain/countryResponse';
+import { LocationResponse } from '../domain/locationReponse';
+import { LocationRequest } from '../domain/locationRequest';
 
 const API_BASE = environment.apiUrl;
 
@@ -74,6 +76,36 @@ export class RegionService extends ServiceUtils {
 
   public deleteCountry(request: CountryRequest): Observable<CountryResponse> {
     return this._http.post(API_BASE + Apis.COUNTRIES_API + Resources.DELETE_COUNTRY, request, this.options).pipe(map(resp => {
+      if (resp.status == 200 || resp.status == 202) {
+        return resp.json();
+      } else {
+        throw new Error(resp.statusText);
+      }
+    }), catchError((error: any) => Observable.throw(error)));
+  }
+
+  public listLocations(): Observable<LocationResponse> {
+    return this._http.get(API_BASE + Apis.LOCATIONS_API + Resources.LIST_LOCATIONS, this.options).pipe(map(resp => {
+      if (resp.ok == true) {
+        return resp.json();
+      } else {
+        throw new Error(resp.statusText);
+      }
+    }, catchError((error: any) => Observable.throw(error))));
+  }
+
+  public createLocation(request: LocationRequest): Observable<CountryResponse> {
+    return this._http.post(API_BASE + Apis.LOCATIONS_API + Resources.CREATE_LOCATION, request, this.options).pipe(map(resp => {
+      if (resp.status == 200 || resp.status == 202) {
+        return resp.json();
+      } else {
+        throw new Error(resp.statusText);
+      }
+    }), catchError((error: any) => Observable.throw(error)));
+  }
+
+  public deleteteLocation(request: LocationRequest): Observable<CountryResponse> {
+    return this._http.post(API_BASE + Apis.LOCATIONS_API + Resources.DELETE_LOCATION, request, this.options).pipe(map(resp => {
       if (resp.status == 200 || resp.status == 202) {
         return resp.json();
       } else {

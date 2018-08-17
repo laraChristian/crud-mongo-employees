@@ -2,10 +2,15 @@ import { Country } from "./country";
 
 export class Locations {
 
-    id: any;
+    id: String;
     streetAddress: String;
     postalCode: String;
     city: String;
     stateProvince: String;
-    country: Country;
+    countryId: String;
+    countryName: String;
+
+    constructor() {
+        this.countryId = '';
+    }
 }

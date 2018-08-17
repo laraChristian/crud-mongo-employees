@@ -37,7 +37,8 @@ export class ServiceUtils {
 export enum Apis {
     EMPLOYEES_API = '/employees-api',
     REGIONS_API = '/regions-api',
-    COUNTRIES_API = '/countries-api'
+    COUNTRIES_API = '/countries-api',
+    LOCATIONS_API = '/locations-api'
 }
 
 export enum Resources {
@@ -47,6 +48,9 @@ export enum Resources {
     DELETE_REGION = '/delete-region',
     CREATE_COUNTRY = '/create-update-country',
     LIST_COUNTRIES = '/list-countries',
-    DELETE_COUNTRY = '/delete-country'
+    DELETE_COUNTRY = '/delete-country',
+    LIST_LOCATIONS = '/list',
+    CREATE_LOCATION = '/create',
+    DELETE_LOCATION = '/delete'
 
 }

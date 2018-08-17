@@ -28,4 +28,10 @@ public class Country {
 	public Country() {
 		super();
 	}
+
+	public Country(ObjectId id) {
+		super();
+		this.id = id;
+	}
+
 }

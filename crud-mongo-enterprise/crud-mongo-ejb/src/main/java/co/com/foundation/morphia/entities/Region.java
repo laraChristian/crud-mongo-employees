@@ -25,7 +25,7 @@ public class Region {
 	@Property(value = "name")
 	private String name;
 	@Reference(value = "locations", lazy = true, ignoreMissing = true)
-	private List<Object> locations;
+	private List<Locations> locations;
 
 	public Region() {
 		super();

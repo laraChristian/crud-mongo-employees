@@ -38,7 +38,7 @@ public class MongoConnection {
 		LOGGER.info("start -- init method");
 		mongoClient = new MongoClient(ConnectionParameters.HOST, ConnectionParameters.PORT);
 		Morphia morphia = new Morphia();
-		morphia.mapPackage(ConnectionParameters.PACKAGESCAN);
+		morphia.map(ConnectionParameters.ENTITIES);
 		datastore = morphia.createDatastore(mongoClient, ConnectionParameters.DBNAME);
 		LOGGER.info("end -- init method");
 	}

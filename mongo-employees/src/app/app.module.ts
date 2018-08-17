@@ -8,6 +8,7 @@ import { UsersUiComponent } from './ui-components/users-ui/users-ui.component';
 import { BaseMenuComponent } from './ui-components/base-menu/base-menu.component';
 import { RegionsUiComponent } from './ui-components/regions-ui/regions-ui.component';
 import { CountriesUiComponent } from './ui-components/countries-ui/countries-ui.component';
+import { LocationsUiComponent } from './ui-components/locations-ui/locations-ui.component';
 
 //prime modules
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +24,7 @@ import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { MessageModule } from 'primeng/message';
 import { AccordionModule } from 'primeng/accordion';   
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 //session
 import { LocalStorageModule } from 'angular-2-local-storage';
@@ -34,6 +36,7 @@ import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +44,8 @@ import { CommonModule } from '@angular/common';
     UsersUiComponent,
     BaseMenuComponent,
     RegionsUiComponent,
-    CountriesUiComponent
+    CountriesUiComponent,
+    LocationsUiComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +69,8 @@ import { CommonModule } from '@angular/common';
     TooltipModule,
     TableModule,
     DropdownModule,
-    MessageModule
+    MessageModule,
+    KeyFilterModule
   ],
   providers: [SessionService, LogginGuard, AuthGuard, MessageService],
   bootstrap: [AppComponent]

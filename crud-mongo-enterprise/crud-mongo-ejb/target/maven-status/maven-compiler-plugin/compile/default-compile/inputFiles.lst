@@ -1,4 +1,6 @@
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\facade\ModulesFacade.java
+C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\mapper\LocationMapper.java
+C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\domain\Location.java
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\entities\Email.java
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\mapper\Mapper.java
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\messages\LoginResponse.java
@@ -19,9 +21,12 @@ C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\c
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\domain\Country.java
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\entities\Employee.java
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\dao\CountryDAO.java
+C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\dao\LocationDAO.java
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\messages\RegionResponse.java
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\persistence\ConnectionParameters.java
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\dao\EmployeeDAO.java
+C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\facade\LocationsModule.java
+C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\messages\LocationRequest.java
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\exceptions\AvailabilityException.java
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\messages\CountryRequest.java
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\types\ComponentType.java
@@ -29,6 +34,7 @@ C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\c
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\persistence\MongoConnection.java
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\entities\Country.java
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\entities\Department.java
+C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\messages\LocationResponse.java
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\messages\EmployeeResponse.java
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\validators\annotation\Validators.java
 C:\git\crud-mongo-employees\crud-mongo-enterprise\crud-mongo-ejb\src\main\java\co\com\foundation\morphia\exceptions\PersistenceException.java
