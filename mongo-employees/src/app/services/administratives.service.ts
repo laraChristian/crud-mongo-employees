@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { DepartmentResponse } from '../domain/DepartmentResponse';
 import { map, catchError } from 'rxjs/operators';
 import { DepartmentRequest } from '../domain/departmentRequest';
+import { JobResponse } from '../domain/jobResponse';
+import { JobRequest } from '../domain/jobRequest';
 
 @Injectable()
 export class AdministrativesService extends ServiceUtils {
@@ -24,8 +26,18 @@ export class AdministrativesService extends ServiceUtils {
     return this.post(request, Apis.ADMINISTRATIVE_API.toString(), Resources.CREATE_DEPARTMENT.toString());
   }
 
-  public deleteDepartment(request: DepartmentRequest): Observable<DepartmentResponse>{
+  public deleteDepartment(request: DepartmentRequest): Observable<DepartmentResponse> {
     console.log('start -- delete-department method');
-    return this.post(request, Apis.ADMINISTRATIVE_API, Resources.DELETE_DEPARTMENT); 
+    return this.post(request, Apis.ADMINISTRATIVE_API, Resources.DELETE_DEPARTMENT);
+  }
+
+  public listJobs(): Observable<JobResponse> {
+    console.log('start -- list-jobs method');
+    return this.get(Apis.ADMINISTRATIVE_API.toString(), Resources.LIST_JOBS.toString());
+  }
+
+  public createJob(request: JobRequest): Observable<JobResponse> {
+    console.log('start -- cerate method');
+    return this.post(request, Apis.ADMINISTRATIVE_API.toString(), Resources.CREATE_JOB.toString());
   }
 }

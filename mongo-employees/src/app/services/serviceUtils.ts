@@ -85,6 +85,8 @@ export enum Resources {
     CREATE_DEPARTMENT = '/create-department',
     LIST_DEPARTMENTS = '/list-departments',
     DELETE_DEPARTMENT = '/delete-department',
-    LIST_EMPLOYEES_CMB = '/list-employees-cmb'
+    LIST_EMPLOYEES_CMB = '/list-employees-cmb',
+    LIST_JOBS = '/list-jobs',
+    CREATE_JOB = '/create-job'
 
 }

@@ -15,12 +15,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import co.com.foundation.morphia.domain.Department;
+import co.com.foundation.morphia.domain.Job;
 import co.com.foundation.morphia.exceptions.AvailabilityException;
 import co.com.foundation.morphia.exceptions.DuplicateNameException;
 import co.com.foundation.morphia.exceptions.PersistenceException;
 import co.com.foundation.morphia.facade.ModulesFacade;
 import co.com.foundation.morphia.messages.DepartmentRequest;
 import co.com.foundation.morphia.messages.DepartmentResponse;
+import co.com.foundation.morphia.messages.JobRequest;
+import co.com.foundation.morphia.messages.JobResponse;
+import co.com.foundation.morphia.messages.JobResponse.JobResponseBuilder;
 import co.com.foundation.morphia.messages.DepartmentResponse.DepartmentResponseBuilder;
 
 @Stateless
@@ -33,6 +37,9 @@ public class AdministrativeApi {
 
 	@EJB(beanName = "DepartmentFacade")
 	private ModulesFacade<DepartmentRequest, Department> departmentFacade;
+
+	@EJB(beanName = "JobFacade")
+	private ModulesFacade<JobRequest, Job> jobFacade;
 
 	@POST
 	@Path("/create-department")
@@ -94,6 +101,66 @@ public class AdministrativeApi {
 			return Response.accepted().entity(blResponse.success(false).message(e.getMessage()).build()).build();
 		} finally {
 			LOGGER.info("end -- delete-department method for:{}", request.getDepartment().getId());
+		}
+	}
+
+	@POST
+	@Path("/create-job")
+	public Response createJob(final JobRequest request) {
+		LOGGER.info("start -- create-job method");
+		JobResponseBuilder blResponse = JobResponse.builder();
+		try {
+			if (request.isUpdate()) {
+				jobFacade.update(request);
+				blResponse.message("The job was modified successfully");
+			} else {
+				jobFacade.create(request);
+				blResponse.message("The job was created successfully");
+			}
+			return Response.ok().entity(blResponse.success(true).build()).build();
+		} catch (DuplicateNameException e) {
+			LOGGER.error(e.getMessage());
+			return Response.accepted().entity(blResponse.success(false).message(e.getMessage()).build()).build();
+		} catch (PersistenceException e) {
+			LOGGER.error(e.getMessage());
+			return Response.serverError().entity(blResponse.success(false).message(e.getMessage()).build()).build();
+		} finally {
+			LOGGER.info("end -- create-job method");
+		}
+	}
+
+	@GET
+	@Path("/list-jobs")
+	public Response listJobs() {
+		LOGGER.info("start -- list-jobs method");
+		JobResponseBuilder blResponse = JobResponse.builder();
+		try {
+			return Response.ok().entity(blResponse.success(true).jobs(jobFacade.listAll()).build()).build();
+		} catch (PersistenceException e) {
+			LOGGER.error(e.getMessage());
+			return Response.serverError().entity(blResponse.success(false).message(e.getMessage()).build()).build();
+		} finally {
+			LOGGER.info("end -- list-jobs method");
+		}
+	}
+
+	@Path("/delete-job")
+	@POST
+	public Response deleteJob(final JobRequest request) {
+		LOGGER.info("start -- delete-job method for:{}", request.getJob().getId());
+		DepartmentResponseBuilder blResponse = DepartmentResponse.builder();
+		try {
+			jobFacade.delete(request);
+			return Response.ok().entity(blResponse.success(true).message("The job was deleted successfully").build())
+					.build();
+		} catch (AvailabilityException e) {
+			LOGGER.error(e.getMessage());
+			return Response.accepted().entity(blResponse.success(false).message(e.getMessage()).build()).build();
+		} catch (PersistenceException e) {
+			LOGGER.error(e.getMessage());
+			return Response.accepted().entity(blResponse.success(false).message(e.getMessage()).build()).build();
+		} finally {
+			LOGGER.info("end -- delete-job method for:{}", request.getJob().getId());
 		}
 	}
 }

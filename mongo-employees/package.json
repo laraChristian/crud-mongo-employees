@@ -23,6 +23,7 @@
     "angular-2-local-storage": "^2.0.0",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
+    "howler": "^2.0.14",
     "local-storage": "^1.4.2",
     "primeicons": "^1.0.0-beta.10",
     "primeng": "^6.1.0",

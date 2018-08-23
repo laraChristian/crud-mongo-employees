@@ -61,7 +61,8 @@ public class DepartmentDAO implements Persistence<DepartmentRequest, Department>
 			}
 
 			if (validator.nameAlReadyExist(department.getId() != null ? new ObjectId(department.getId()) : null,
-					department.getName(), co.com.foundation.morphia.entities.Department.class)) {
+					Utils.Columns.NAME.getId(), department.getName(),
+					co.com.foundation.morphia.entities.Department.class)) {
 				throw new DuplicateNameException("This name already assigned  to other department");
 			}
 
@@ -110,8 +111,8 @@ public class DepartmentDAO implements Persistence<DepartmentRequest, Department>
 				}
 			}
 
-			if (validator.nameAlReadyExist(new ObjectId(department.getId()), department.getName(),
-					co.com.foundation.morphia.entities.Department.class)) {
+			if (validator.nameAlReadyExist(new ObjectId(department.getId()), Utils.Columns.NAME.getId(),
+					department.getName(), co.com.foundation.morphia.entities.Department.class)) {
 				throw new DuplicateNameException("This name already assigned  to other department");
 			}
 

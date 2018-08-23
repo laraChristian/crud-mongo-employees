@@ -1,6 +1,6 @@
 export class Job {
 
-    id: any;
+    id: String;
     jobTittle: String;
     minSalary: number;
     maxSalary: number;

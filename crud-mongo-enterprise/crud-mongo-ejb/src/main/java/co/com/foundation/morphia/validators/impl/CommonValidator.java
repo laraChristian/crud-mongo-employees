@@ -33,10 +33,11 @@ public class CommonValidator implements Validator {
 	 *         false is returned
 	 */
 	@Override
-	public <T> boolean nameAlReadyExist(ObjectId id, String name, Class<T> className) throws PersistenceException {
+	public <T> boolean nameAlReadyExist(ObjectId id, String column, String name, Class<T> className)
+			throws PersistenceException {
 		LOGGER.info("start -- name-already-exist method");
 		Datastore datastore = connection.getDataStore();
-		Query<T> nameAlreadyExist = datastore.createQuery(className).field("name").equal(name.trim());
+		Query<T> nameAlreadyExist = datastore.createQuery(className).field(column).equal(name.trim());
 
 		if (id != null) {
 			nameAlreadyExist.and(nameAlreadyExist.criteria("_id").notEqual(id));

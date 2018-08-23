@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
 
+import co.com.foundation.morphia.commons.Utils;
 import co.com.foundation.morphia.entities.Country;
 import co.com.foundation.morphia.entities.Region;
 import co.com.foundation.morphia.exceptions.AvailabilityException;
@@ -45,7 +46,7 @@ public class RegionsDAO implements Persistence<RegionRequest, co.com.foundation.
 			co.com.foundation.morphia.domain.Region region = request.getRegion();
 
 			if (validator.nameAlReadyExist(region.getId() != null ? new ObjectId(region.getId()) : null,
-					region.getName(), Region.class)) {
+					Utils.Columns.NAME.getId(), region.getName(), Region.class)) {
 				throw new DuplicateNameException("This name already assigned to another region");
 			}
 
@@ -79,7 +80,8 @@ public class RegionsDAO implements Persistence<RegionRequest, co.com.foundation.
 		try {
 			LOGGER.info("start -- update method for:{}", request.getRegion().getId());
 			co.com.foundation.morphia.domain.Region region = request.getRegion();
-			if (validator.nameAlReadyExist(new ObjectId(region.getId()), region.getName(), Region.class)) {
+			if (validator.nameAlReadyExist(new ObjectId(region.getId()), Utils.Columns.NAME.getId(), region.getName(),
+					Region.class)) {
 				throw new DuplicateNameException("This name already assigned to another region");
 			}
 			connection.getDataStore().merge(mapper.marshall(region));

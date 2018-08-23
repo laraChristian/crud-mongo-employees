@@ -8,10 +8,25 @@ public interface Utils {
 		PRESIDENT, MANAGER
 	}
 
+	enum Columns {
+		NAME("name"), JOBTITTLE("jobTittle"), JOB("job");
+
+		private Columns(final String id) {
+			this.id = id;
+		}
+
+		private String id;
+
+		public String getId() {
+			return this.id;
+		}
+	}
+
 	Predicate<String> isToReject = (String id) -> {
 		if (id == null) {
 			return true;
 		}
 		return id.trim().equals("0");
 	};
+
 }

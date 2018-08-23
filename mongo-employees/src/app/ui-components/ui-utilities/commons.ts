@@ -24,7 +24,8 @@ export class Commons {
 
     validateFields(properties: string[], object: any): boolean {
         for (let prop of properties) {
-            if (object[prop] == void 0 || object[prop] == null || object[prop].trim() == "") {
+            console.log(object[prop])
+            if (object[prop] == void 0 || object[prop] == null || object[prop] == "") {
                 return false;
             }
         }

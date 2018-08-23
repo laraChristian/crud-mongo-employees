@@ -27,6 +27,7 @@ import { MessageModule } from 'primeng/message';
 import { AccordionModule } from 'primeng/accordion';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { DialogModule } from 'primeng/dialog';
+import { MessagesModule } from 'primeng/messages';
 
 //session
 import { LocalStorageModule } from 'angular-2-local-storage';
@@ -36,6 +37,7 @@ import { AuthGuard } from './security/auth-guard';
 import { routing } from './routing-conf/app-routes';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
+import { JobsUiComponent } from './ui-components/jobs-ui/jobs-ui.component';
 
 
 @NgModule({
@@ -47,7 +49,8 @@ import { CommonModule } from '@angular/common';
     RegionsUiComponent,
     CountriesUiComponent,
     LocationsUiComponent,
-    DepartmentsUiComponent
+    DepartmentsUiComponent,
+    JobsUiComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +76,8 @@ import { CommonModule } from '@angular/common';
     DropdownModule,
     MessageModule,
     KeyFilterModule,
-    DialogModule
+    DialogModule,
+    MessagesModule
   ],
   providers: [SessionService, LogginGuard, AuthGuard, MessageService],
   bootstrap: [AppComponent]

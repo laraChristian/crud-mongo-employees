@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
 
+import co.com.foundation.morphia.commons.Utils;
 import co.com.foundation.morphia.domain.Country;
 import co.com.foundation.morphia.entities.Locations;
 import co.com.foundation.morphia.exceptions.AvailabilityException;
@@ -44,7 +45,7 @@ public class CountryDAO implements Persistence<CountryRequest, co.com.foundation
 		try {
 			Country country = request.getCountry();
 			if (validator.nameAlReadyExist(country.getId() != null ? new ObjectId(country.getId()) : null,
-					country.getName(), co.com.foundation.morphia.entities.Country.class)) {
+					Utils.Columns.NAME.getId(), country.getName(), co.com.foundation.morphia.entities.Country.class)) {
 				throw new DuplicateNameException("This name already exist");
 			}
 
@@ -79,7 +80,7 @@ public class CountryDAO implements Persistence<CountryRequest, co.com.foundation
 		LOGGER.info("start -- update method for:{}", request.getCountry().getId());
 		try {
 			Country country = request.getCountry();
-			if (validator.nameAlReadyExist(new ObjectId(country.getId()), country.getName(),
+			if (validator.nameAlReadyExist(new ObjectId(country.getId()), Utils.Columns.NAME.getId(), country.getName(),
 					co.com.foundation.morphia.entities.Country.class)) {
 				throw new DuplicateNameException("This name already assigned to other country");
 			}

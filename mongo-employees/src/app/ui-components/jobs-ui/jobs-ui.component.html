@@ -1,0 +1,81 @@
+<div class="ui-g">
+
+  <div class="ui-g-12 ui-md-12 ui-lg-12">
+    <p-panel>
+      <p-header>
+        <b>
+          <i>Jobs Management Center</i>
+        </b>
+        <p-messages [(value)]="_model.msgs"></p-messages>
+      </p-header>
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+
+          <div class="ui-g-12 ui-md-6 ui-lg-6">
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+              <input pInputText type="text" pTooltip="Job Tittle" placeholder="Right" tooltipEvent="focus" placeholder="Programmer" [pKeyFilter]="_model.ccRegex"
+                style="width: 90%; height: 34px;" [(ngModel)]="_model.request.job.jobTittle">
+            </div>
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+              <input pInputText type="text" pTooltip="Min-Salary" placeholder="Right" tooltipEvent="focus" placeholder="4000" pKeyFilter="int"
+                style="width: 90%; height: 34px;" [(ngModel)]="_model.request.job.minSalary">
+            </div>
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+              <input pInputText type="text" pTooltip="Max-Salary" placeholder="Right" tooltipEvent="focus" placeholder="9000" pKeyFilter="int"
+                style="width: 90%; height: 34px;" [(ngModel)]="_model.request.job.maxSalary">
+            </div>
+          </div>
+
+          <div class="ui-g-12 ui-md-6 ui-lg-6">
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+              <button pButton type="button" label="Send" icon="fa fa-cloud-upload" (click)="save()" style="width: 90%" class="ui-button-raised ui-button-success"></button>
+            </div>
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+              <button pButton type="button" label="Delete" [disabled]="_model.disableDelete" icon="fa fa-minus-square" style="width: 90%"
+                class="ui-button-raised ui-button-danger"></button>
+            </div>
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+              <button pButton type="button" label="Clean" icon="fa fa-eraser" (click)="_model.clean()" style="width: 90%" class="ui-button-raised ui-button-secondary"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p-footer>
+        <div class="ui-g">
+          <div class="ui-g-12 ui-md-12 ui-lg-12" style="text-align: center">
+            <p-panel header="Jobs" [toggleable]="true">
+              <p-table [columns]="_model.cols" [value]="_model.jobsDtbl" [(selection)]="_model.request.job" [responsive]="true">
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field" style="width:15em">
+                      {{col.header}}
+                      <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                    </th>
+                    <th style="width:8em">
+                      Select
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                  <tr>
+                    <td *ngFor="let col of columns">
+                      <span class="ui-column-title">{{col.header}}</span>
+                      {{rowData[col.field]}}
+                    </td>
+                    <td>
+                      <button pButton icon="fa fa-check" (click)="selectCar(rowData)" style="width:  70%"></button>
+                    </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                  There are {{_model.cols?.length}} jobs
+                </ng-template>
+              </p-table>
+            </p-panel>
+          </div>
+        </div>
+      </p-footer>
+    </p-panel>
+  </div>
+</div>

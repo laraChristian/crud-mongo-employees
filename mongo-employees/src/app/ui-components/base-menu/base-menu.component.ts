@@ -27,7 +27,8 @@ export class BaseMenuComponent implements OnInit {
     },
     {
       label: 'Administratives', icon: 'fa fa-cubes', items: [
-        { label: 'Departments', icon: 'fa fa-empire', routerLink: 'departments-ui' }
+        { label: 'Departments', icon: 'fa fa-empire', routerLink: 'departments-ui' },
+        { label: 'Jobs', icon: 'fa fa-briefcase', routerLink: 'jobs-ui' }
       ]
     }]
   }
