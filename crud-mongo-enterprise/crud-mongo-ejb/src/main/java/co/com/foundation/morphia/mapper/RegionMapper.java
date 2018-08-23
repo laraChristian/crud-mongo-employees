@@ -19,7 +19,7 @@ public class RegionMapper
 	private final Logger LOGGER = LogManager.getLogger(RegionMapper.class);
 
 	@Override
-	public co.com.foundation.morphia.entities.Region map(Region input) {
+	public co.com.foundation.morphia.entities.Region marshall(Region input) {
 		try {
 			LOGGER.info("start -- map method");
 			RegionBuilder builder = co.com.foundation.morphia.entities.Region.builder();
@@ -32,6 +32,11 @@ public class RegionMapper
 		} finally {
 			LOGGER.info("end -- map method");
 		}
+	}
+
+	@Override
+	public Region unMarshall(co.com.foundation.morphia.entities.Region input) {
+		return null;
 	}
 
 }

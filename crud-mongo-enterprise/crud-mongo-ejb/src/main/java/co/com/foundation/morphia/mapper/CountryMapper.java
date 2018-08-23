@@ -20,7 +20,7 @@ public class CountryMapper
 	private final Logger LOGGER = LogManager.getLogger(CountryMapper.class);
 
 	@Override
-	public co.com.foundation.morphia.entities.Country map(Country input) {
+	public co.com.foundation.morphia.entities.Country marshall(Country input) {
 		try {
 			LOGGER.info("start -- map method");
 			CountryBuilder builder = co.com.foundation.morphia.entities.Country.builder();
@@ -32,6 +32,11 @@ public class CountryMapper
 		} finally {
 			LOGGER.info("end -- map method");
 		}
+	}
+
+	@Override
+	public Country unMarshall(co.com.foundation.morphia.entities.Country input) {
+		return null;
 	}
 
 }

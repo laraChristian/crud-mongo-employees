@@ -1,6 +1,7 @@
 co\com\foundation\morphia\ws\EmployeesApi.class
 co\com\foundation\morphia\cors\CORSFilter.class
 co\com\foundation\morphia\ws\ApiConfiguration.class
+co\com\foundation\morphia\ws\RegionsApi.class
+co\com\foundation\morphia\ws\AdministrativeApi.class
 co\com\foundation\morphia\ws\CountryApi.class
 co\com\foundation\morphia\ws\LocationsApi.class
-co\com\foundation\morphia\ws\RegionsApi.class

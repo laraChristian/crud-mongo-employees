@@ -5,12 +5,16 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity("jobs")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 public class Job {
 
 	@Id

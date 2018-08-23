@@ -10,7 +10,7 @@ public interface ModulesFacade<I, O> {
 
 	List<O> listAll() throws PersistenceException;
 
-	void update(final I reuqest) throws PersistenceException;
+	void update(final I request) throws PersistenceException;
 
 	void delete(final I request) throws PersistenceException;
 }

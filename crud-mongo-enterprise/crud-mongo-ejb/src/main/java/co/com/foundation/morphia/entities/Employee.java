@@ -9,12 +9,16 @@ import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity("employees")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 public class Employee {
 
 	@Id
@@ -40,21 +44,6 @@ public class Employee {
 
 	public Employee() {
 		super();
-	}
-
-	public Employee(ObjectId id, String firstName, String lastName, Email email, String phoneNumber, Date hireDate,
-			String identification, Employee manager, Job job, Department department) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.hireDate = hireDate;
-		this.identification = identification;
-		this.manager = manager;
-		this.job = job;
-		this.department = department;
 	}
 
 }

@@ -42,7 +42,7 @@ public class LocationDAO implements Persistence<LocationRequest, Location> {
 	public void create(LocationRequest request) throws PersistenceException {
 		try {
 			LOGGER.info("start -- create method");
-			connection.getDataStore().save(mapper.map(request.getLocation()));
+			connection.getDataStore().save(mapper.marshall(request.getLocation()));
 		} catch (Exception e) {
 			throw new PersistenceException(e.getMessage(), e);
 		} finally {
@@ -54,11 +54,8 @@ public class LocationDAO implements Persistence<LocationRequest, Location> {
 	public List<Location> listAll() throws PersistenceException {
 		try {
 			LOGGER.info("start -- list-all method");
-			return connection.getDataStore().find(Locations.class).asList().stream().map((entity) -> {
-				return new Location(entity.getId().toHexString(), entity.getStreetAddress(), entity.getPostalCode(),
-						entity.getCity(), entity.getStateProvince(), entity.getCountry().getId().toHexString(),
-						entity.getCountry().getCountryName());
-			}).collect(Collectors.toList());
+			return connection.getDataStore().find(Locations.class).asList().stream().map(mapper::unMarshall)
+					.collect(Collectors.toList());
 		} catch (Exception e) {
 			throw new PersistenceException(e.getMessage(), e);
 		} finally {
@@ -70,7 +67,7 @@ public class LocationDAO implements Persistence<LocationRequest, Location> {
 	public void update(LocationRequest request) throws PersistenceException {
 		try {
 			LOGGER.info("start -- update method");
-			connection.getDataStore().merge(mapper.map(request.getLocation()));
+			connection.getDataStore().merge(mapper.marshall(request.getLocation()));
 		} catch (Exception e) {
 			throw new PersistenceException(e.getMessage(), e);
 		} finally {
@@ -87,8 +84,7 @@ public class LocationDAO implements Persistence<LocationRequest, Location> {
 				throw new AvailabilityException(
 						"The location was found in multiple countries, this should be unassigned to can be delete");
 			}
-
-			connection.getDataStore().delete(mapper.map(location));
+			connection.getDataStore().delete(mapper.marshall(location));
 		} catch (AvailabilityException e) {
 			throw e;
 		} catch (Exception e) {

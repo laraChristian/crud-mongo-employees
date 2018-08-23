@@ -48,7 +48,7 @@ public class CountryDAO implements Persistence<CountryRequest, co.com.foundation
 				throw new DuplicateNameException("This name already exist");
 			}
 
-			connection.getDataStore().save(mapper.map(country));
+			connection.getDataStore().save(mapper.marshall(country));
 		} catch (DuplicateNameException e) {
 			throw e;
 		} catch (Exception e) {
@@ -84,7 +84,7 @@ public class CountryDAO implements Persistence<CountryRequest, co.com.foundation
 				throw new DuplicateNameException("This name already assigned to other country");
 			}
 
-			connection.getDataStore().save(mapper.map(country));
+			connection.getDataStore().save(mapper.marshall(country));
 		} catch (DuplicateNameException e) {
 			throw e;
 		} catch (Exception e) {
@@ -106,7 +106,7 @@ public class CountryDAO implements Persistence<CountryRequest, co.com.foundation
 						"The country was found in multiple locations, this should be unassigned to can be delete ");
 			}
 
-			connection.getDataStore().delete(mapper.map(country));
+			connection.getDataStore().delete(mapper.marshall(country));
 		} catch (AvailabilityException e) {
 			throw e;
 		} catch (Exception e) {

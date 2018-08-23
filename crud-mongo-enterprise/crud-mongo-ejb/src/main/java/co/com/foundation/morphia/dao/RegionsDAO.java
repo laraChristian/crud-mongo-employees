@@ -49,7 +49,7 @@ public class RegionsDAO implements Persistence<RegionRequest, co.com.foundation.
 				throw new DuplicateNameException("This name already assigned to another region");
 			}
 
-			connection.getDataStore().save(mapper.map(region));
+			connection.getDataStore().save(mapper.marshall(region));
 		} catch (DuplicateNameException e) {
 			throw e;
 		} catch (Exception e) {
@@ -82,7 +82,7 @@ public class RegionsDAO implements Persistence<RegionRequest, co.com.foundation.
 			if (validator.nameAlReadyExist(new ObjectId(region.getId()), region.getName(), Region.class)) {
 				throw new DuplicateNameException("This name already assigned to another region");
 			}
-			connection.getDataStore().merge(mapper.map(region));
+			connection.getDataStore().merge(mapper.marshall(region));
 		} catch (DuplicateNameException e) {
 			throw e;
 		} catch (Exception e) {
@@ -101,7 +101,7 @@ public class RegionsDAO implements Persistence<RegionRequest, co.com.foundation.
 				throw new AvailabilityException(
 						"The region was found in multiple countries, this should be unassigned to can be delete");
 			}
-			connection.getDataStore().delete(mapper.map(region));
+			connection.getDataStore().delete(mapper.marshall(region));
 		} catch (AvailabilityException e) {
 			throw e;
 		} catch (Exception e) {

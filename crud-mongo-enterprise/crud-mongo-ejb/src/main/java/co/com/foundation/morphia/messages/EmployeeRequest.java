@@ -8,8 +8,4 @@ public class EmployeeRequest {
 
 	private boolean update;
 	private Employee employee;
-
-	public EmployeeRequest() {
-		super();
-	}
 }
