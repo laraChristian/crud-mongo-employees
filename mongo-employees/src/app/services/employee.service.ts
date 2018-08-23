@@ -6,6 +6,7 @@ import { LoginResponse } from '../domain/loginResponse';
 import { environment } from '../../environments/environment';
 import { LoginRequest } from '../domain/loginRequest';
 import { map } from 'rxjs/operators';
+import { EmployeeResponse } from '../domain/employeeResponse';
 
 const API_URL = environment.apiUrl;
 
@@ -23,5 +24,10 @@ export class EmployeeService {
   public login(request: LoginRequest): Observable<LoginResponse> {
     console.log('start -- login method');
     return this._http.post(API_URL + Apis.EMPLOYEES_API + Resources.LOGIN, request, this._options).pipe(map(resp => resp.json()));
+  }
+
+  public listCmb(): Observable<EmployeeResponse> {
+    console.log('start -- list-cmb method');
+    return this._http.get(API_URL + Apis.EMPLOYEES_API + Resources.LIST_EMPLOYEES_CMB, this._options).pipe(map(resp => resp.json()));
   }
 }

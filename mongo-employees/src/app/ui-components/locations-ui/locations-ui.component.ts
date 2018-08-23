@@ -28,7 +28,7 @@ export class LocationsUiComponent implements OnInit {
       resp => {
         if (resp.success == true) {
           this._model.request.location.countryId = ' ';
-          this._model.fillSelectItem(resp.countries, 'name', 'id', this._model.countryItems);
+          this._model.fillSelectItem(resp.countries, 'name', 'id', this._model.countryItems, { label: 'Countries', value: '' });
         } else {
           console.error('[ERROR] ' + resp.success)
         }

@@ -5,6 +5,8 @@ export class Department {
 
     id: any;
     name: String;
-    manager: Employee;
-    location: Locations;
+    managerId: String;
+    managerName: String;
+    locationId: String;
+    locationAddress: String;
 }

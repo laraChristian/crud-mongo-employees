@@ -16,13 +16,13 @@ const API_BASE = environment.apiUrl;
 @Injectable()
 export class RegionService extends ServiceUtils {
 
-  constructor(private _http: Http) {
-    super();
+  constructor(private _httpRequest: Http) {
+    super(_httpRequest);
   }
 
   public createRegions(request: RegionRequest): Observable<RegionResponse> {
     console.log(request);
-    return this._http.post(API_BASE + Apis.REGIONS_API + Resources.CREATE_REGION, request, this.options).pipe(map(resp => {
+    return this._httpRequest.post(API_BASE + Apis.REGIONS_API + Resources.CREATE_REGION, request, this.options).pipe(map(resp => {
       console.log('Response ' + resp.status)
       if (resp.status == 200 || resp.status == 202) {
         return resp.json();

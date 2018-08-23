@@ -1,11 +1,17 @@
 import { RequestOptions, Headers } from "@angular/http";
+import { Http } from '@angular/http';
+import { Observable } from "rxjs";
+import { environment } from "../../environments/environment";
+import { map, catchError } from "rxjs/operators";
+
+const BASE_API = environment.apiUrl;
 
 export class ServiceUtils {
 
     private _headers: Headers;
     private _options: RequestOptions;
 
-    constructor() {
+    constructor(protected _http: Http) {
         this.initHeaders();
     }
 
@@ -32,13 +38,37 @@ export class ServiceUtils {
         this._options = new RequestOptions({ headers: this._headers });
     }
 
+    protected post<T, O>(request: T, api: string, resource: string): Observable<O> {
+        console.log('start -- post method');
+        return this._http.post(BASE_API + api + resource, request, this.options).pipe(map(resp => {
+            if (resp.ok === true) {
+                return resp.json();
+            } else {
+                throw new Error(resp.statusText);
+            }
+        }, catchError((error: any) => Observable.throw(error))));
+    }
+
+    protected get<O>(api: string, resource: string): Observable<O> {
+        console.log('start -- get method');
+        return this._http.get(BASE_API + api + resource, this.options).pipe(map(resp => {
+            console.info('get method status: ' + resp.status);
+            if (resp.ok == true) {
+                return resp.json()
+            } else {
+                throw new Error(resp.statusText);
+            }
+        }, catchError((error: any) => Observable.throw(error))));
+    }
+
 }
 
 export enum Apis {
     EMPLOYEES_API = '/employees-api',
     REGIONS_API = '/regions-api',
     COUNTRIES_API = '/countries-api',
-    LOCATIONS_API = '/locations-api'
+    LOCATIONS_API = '/locations-api',
+    ADMINISTRATIVE_API = '/administrative-api'
 }
 
 export enum Resources {
@@ -51,6 +81,10 @@ export enum Resources {
     DELETE_COUNTRY = '/delete-country',
     LIST_LOCATIONS = '/list',
     CREATE_LOCATION = '/create',
-    DELETE_LOCATION = '/delete'
+    DELETE_LOCATION = '/delete',
+    CREATE_DEPARTMENT = '/create-department',
+    LIST_DEPARTMENTS = '/list-departments',
+    DELETE_DEPARTMENT = '/delete-department',
+    LIST_EMPLOYEES_CMB = '/list-employees-cmb'
 
 }

@@ -1,18 +1,17 @@
-import { Email } from "./email";
-import { Department } from "./department";
-import { Job } from "./job";
-
 export class Employee {
 
-    id: any;
+    id: String;
     firstName: String;
     lastName: String;
-    email: Email;
+    email: String;
+    password: String;
     phoneNumber: String;
     hireDate: Date;
     identification: String;
-    manager: Employee;
-    department: Department;
-    job: Job;
-
+    managerId: String;
+    managerName: String;
+    jobId: String;
+    jobTittle: String;
+    departmentId: String;
+    departmentName: String;
 }

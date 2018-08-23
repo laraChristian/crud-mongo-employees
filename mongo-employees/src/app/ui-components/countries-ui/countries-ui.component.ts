@@ -29,7 +29,7 @@ export class CountriesUiComponent implements OnInit {
       resp => {
         if (resp.success == true) {
           this._model.request.country.regionId = ' ';
-          this._model.fillSelectItem(resp.regions, 'name', 'id', this._model.regionsItems);
+          this._model.fillSelectItem(resp.regions, 'name', 'id', this._model.regionsItems, { label: 'Regions', value: '' } );
         } else {
           console.error('[ERROR] ' + resp.message);
         }

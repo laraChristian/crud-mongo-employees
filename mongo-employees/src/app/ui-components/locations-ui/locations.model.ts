@@ -33,7 +33,7 @@ export class LocationsModel extends Commons implements Mapper {
             'postalCode': new FormControl('', Validators.required),
             'city': new FormControl('', Validators.required),
             'stateProvince': new FormControl('', Validators.required),
-            'countryId': new FormControl('', Validators.required)
+            'countryId': new FormControl('0', Validators.required)
         })
     }
 
