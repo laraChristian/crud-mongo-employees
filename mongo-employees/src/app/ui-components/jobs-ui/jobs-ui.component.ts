@@ -72,5 +72,23 @@ export class JobsUiComponent implements OnInit {
       this._messageService.add({ severity: 'error', summary: 'Error', detail: 'Empty fields arent allowed' });
     }
   }
+
+  private delete(): void {
+    this._administrativeApi.deleteJob(this._model.request).subscribe(
+      resp => {
+        if (resp.success == true) {
+          this._messageService.add({ severity: 'success', summary: 'Atention', detail: resp.message.toString() });
+          this._model.clean();
+        } else {
+          this._messageService.add({ severity: 'success', summary: 'Atention', detail: resp.message.toString() });
+        }
+        this.listJobs();
+      },
+      error => {
+        this._messageService.add({ severity: 'error', summary: 'Error', detail: 'You shoul communicate with support immediately' });
+        console.error('[ERROR] ' + error);
+      }
+    );
+  }
   //#endregion
 }

@@ -1,0 +1,180 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<div class="ui-g">
+    <div class="ui-g-12 ui-md-12 ui-lg-12">
+        <p-panel>
+            <p-header>
+                <b>
+                    <i>Employees Managament Center</i>
+                </b>
+            </p-header>
+
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-12 ui-lg-12 oldlace">
+                    <form [formGroup]="_model.employeeForm" (ngSubmit)="create()">
+
+                        <div class="ui-g-12 ui-md-12 ui-lg-6">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                <h3>Personal </h3>
+                                <div class="ui-g-12 ui-md-6 ui-lg-6">
+                                    <input type="text" pInputText pTooltip="First Name" placeholder="Michael" tooltipEvent="focus" formControlName="firstName"
+                                        required style="width: 100%">
+                                    <div class="alert rounded-corners" *ngIf="!_model.employeeForm.controls['firstName'].valid&&_model.employeeForm.controls['firstName'].dirty">
+                                        <i class="fa fa-info-circle">
+                                            First name is requerid!
+                                        </i>
+                                    </div>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-6">
+                                    <input type="text" pInputText pTooltip="Last Name" placeholder="Debon" tooltipEvent="focus" formControlName="lastName" required
+                                        style="width: 100%">
+                                    <div class="alert rounded-corners" *ngIf="!_model.employeeForm.controls['lastName'].valid&&_model.employeeForm.controls['lastName'].dirty">
+                                        <i class="fa fa-info-circle">
+                                            Last name is requerid!
+                                        </i>
+                                    </div>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-6">
+                                    <input type="text" pInputText pTooltip="phoneNumber" placeholder="5550525" tooltipEvent="focus" formControlName="phoneNumber"
+                                        required style="width: 100%">
+                                    <div class="alert rounded-corners" *ngIf="!_model.employeeForm.controls['phoneNumber'].valid&&_model.employeeForm.controls['phoneNumber'].dirty">
+                                        <i class="fa fa-info-circle">
+                                            Phone number is requerid!
+                                        </i>
+                                    </div>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-6">
+                                    <input type="text" pInputText pTooltip="Identification" placeholder="1019126801" tooltipEvent="focus" formControlName="identification"
+                                        required style="width: 100%">
+                                    <div class="alert rounded-corners" *ngIf="!_model.employeeForm.controls['identification'].valid&&_model.employeeForm.controls['identification'].dirty">
+                                        <i class="fa fa-info-circle">
+                                            Identification is requerid!
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-12 ui-lg-6">
+                            <div formGroupName="administrative" class="ui-g-12 ui-md-12 ui-lg-12">
+                                <h3>Administrative </h3>
+                                <div class="ui-g-12 ui-md-6 ui-lg-6">
+                                    <p-dropdown [options]="_model.managersItems" formControlName="managerId" [(ngModel)]="_model.request.employee.managerId"
+                                        [style]="{'width':'100%'}" filter="true" required>
+                                        <ng-template let-item pTemplate="selectedItem">
+                                            <span style="vertical-align:middle">{{item.label}}</span>
+                                        </ng-template>
+                                        <ng-template let-car pTemplate="item">
+                                            <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                                                <div style="font-size:14px;float:right;margin-top:4px">{{car.label}}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-dropdown>
+                                    <div class="alert rounded-corners" *ngIf="!_model.employeeForm.get('administrative').get('managerId').valid&&_model.employeeForm.get('administrative').get('managerId').dirty">
+                                        <i class="fa fa-info-circle">
+                                            Manager is requerid!
+                                        </i>
+                                    </div>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-6">
+                                    <p-dropdown [options]="_model.jobItems" formControlName="jobId" (onChange)="onChangeJob()" [(ngModel)]="_model.request.employee.jobId"
+                                        [style]="{'width':'100%'}" filter="true" required>
+                                        <ng-template let-item pTemplate="selectedItem">
+                                            <span style="vertical-align:middle">{{item.label}}</span>
+                                        </ng-template>
+                                        <ng-template let-car pTemplate="item">
+                                            <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                                                <div style="font-size:14px;float:right;margin-top:4px">{{car.label}}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-dropdown>
+                                    <div class="alert rounded-corners" *ngIf="!_model.employeeForm.get('administrative').get('jobId').valid&&_model.employeeForm.get('administrative').get('jobId').dirty">
+                                        <i class="fa fa-info-circle">
+                                            Job is requerid!
+                                        </i>
+                                    </div>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-6">
+                                    <p-dropdown [options]="_model.departmentItems" formControlName="departmentId" [(ngModel)]="_model.request.employee.departmentId"
+                                        [style]="{'width':'100%'}" filter="true" required>
+                                        <ng-template let-item pTemplate="selectedItem">
+                                            <span style="vertical-align:middle">{{item.label}}</span>
+                                        </ng-template>
+                                        <ng-template let-car pTemplate="item">
+                                            <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                                                <div style="font-size:14px;float:right;margin-top:4px">{{car.label}}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-dropdown>
+                                    <div class="alert rounded-corners" *ngIf="!_model.employeeForm.controls['administrative'].get('departmentId').valid&&_model.employeeForm.controls['administrative'].get('departmentId').dirty">
+                                        <i class="fa fa-info-circle">
+                                            Job is requerid!
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-12 ui-lg-6">
+                            <div formGroupName="email" class="ui-g-12 ui-md-12 ui-lg-12">
+                                <h3>Email</h3>
+                                <div class="ui-g-12 ui-md-6 ui-lg-6">
+                                    <input type="text" pInputText pTooltip="Email" placeholder="michaelDebon@gmail.com" tooltipEvent="focus" formControlName="email"
+                                        required style="width: 100%" required>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-6">
+                                    <input type="password" pPassword pTooltip="Password" placeholder="qwerty" tooltipEvent="focus" formControlName="password"
+                                        required style="width: 100%" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-12 ui-lg-6">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                <h3>Actions</h3>
+                                <div class="ui-g-12 ui-md-12 ui-lg-4">
+                                    <button pButton type="submit" label="Save" [disabled]="!_model.employeeForm.valid" class="ui-button-success" style="width: 100%"></button>
+                                </div>
+                                <div class="ui-g-12 ui-md-12 ui-lg-4">
+                                    <button pButton type="button" (click)="delete()" label="Delete" [disabled]="_model.disableDelete" class="ui-button-danger"
+                                        style="width: 100%"></button>
+                                </div>
+                                <div class="ui-g-12 ui-md-12 ui-lg-4">
+                                    <button pButton type="button" (click)="_model.clean()" label="Clean" class="ui-button-secondary" style="width: 100%"></button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+
+            <p-footer>
+                <div class="ui-g" style="text-align: center">
+                    <p-table #dt [columns]="_model.dtblCols" [value]="_model.dtblEmployees" (onRowSelect)="onRowSelect()" (onRowUnselect)="_model.clean()"
+                        selectionMode="single" [(selection)]="_model.request.employee" [responsive]="true">
+                        <ng-template pTemplate="caption">
+                            <div class="ui-helper-clearfix">
+                                <button type="button" pButton icon="fa fa-file-o" iconPos="left" label="All Data" (click)="dt.exportCSV()" style="float:left"></button>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th *ngFor="let col of columns">
+                                    {{col.header}}
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <tr [pSelectableRow]="rowData">
+                                <td *ngFor="let col of columns">
+                                    <span class="ui-column-title">{{col.header}}</span>
+                                    {{rowData[col.field]}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </p-footer>
+        </p-panel>
+    </div>
+</div>

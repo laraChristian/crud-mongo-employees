@@ -17,7 +17,7 @@ export class BaseMenuComponent implements OnInit {
   constructor(private session: SessionService, private _router: Router) { }
 
   ngOnInit() {
-    this._items = [{ label: 'Users', icon: 'fa fa-users', routerLink: 'users-ui' },
+    this._items = [{ label: 'Employees', icon: 'fa fa-users', routerLink: 'employees-ui' },
     {
       label: 'Regions', icon: 'fa fa-ra', items: [
         { label: 'Regions', icon: 'fa fa-adn', routerLink: 'regions-ui' },

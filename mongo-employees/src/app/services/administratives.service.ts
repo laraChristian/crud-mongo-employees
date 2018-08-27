@@ -40,4 +40,9 @@ export class AdministrativesService extends ServiceUtils {
     console.log('start -- cerate method');
     return this.post(request, Apis.ADMINISTRATIVE_API.toString(), Resources.CREATE_JOB.toString());
   }
+
+  public deleteJob(request: JobRequest): Observable<JobResponse> {
+    console.log('start delete-job method');
+    return this.post(request, Apis.ADMINISTRATIVE_API.toString(), Resources.DELETE_JOB.toString());
+  }
 }

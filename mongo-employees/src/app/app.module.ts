@@ -4,12 +4,13 @@ import { NgModule } from '@angular/core';
 //components
 import { AppComponent } from './app.component';
 import { LoginUiComponent } from './ui-components/login-ui/login-ui.component';
-import { UsersUiComponent } from './ui-components/users-ui/users-ui.component';
 import { BaseMenuComponent } from './ui-components/base-menu/base-menu.component';
 import { RegionsUiComponent } from './ui-components/regions-ui/regions-ui.component';
 import { CountriesUiComponent } from './ui-components/countries-ui/countries-ui.component';
 import { LocationsUiComponent } from './ui-components/locations-ui/locations-ui.component';
 import { DepartmentsUiComponent } from './ui-components/departments-ui/departments-ui.component';
+import { JobsUiComponent } from './ui-components/jobs-ui/jobs-ui.component';
+import { EmployeesUiComponent } from './ui-components/employees-ui/employees-ui.component';
 
 //prime modules
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,6 +29,8 @@ import { AccordionModule } from 'primeng/accordion';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { DialogModule } from 'primeng/dialog';
 import { MessagesModule } from 'primeng/messages';
+import { FileUploadModule } from 'primeng/fileupload';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 //session
 import { LocalStorageModule } from 'angular-2-local-storage';
@@ -37,20 +40,18 @@ import { AuthGuard } from './security/auth-guard';
 import { routing } from './routing-conf/app-routes';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
-import { JobsUiComponent } from './ui-components/jobs-ui/jobs-ui.component';
-
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginUiComponent,
-    UsersUiComponent,
     BaseMenuComponent,
     RegionsUiComponent,
     CountriesUiComponent,
     LocationsUiComponent,
     DepartmentsUiComponent,
-    JobsUiComponent
+    JobsUiComponent,
+    EmployeesUiComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +78,10 @@ import { JobsUiComponent } from './ui-components/jobs-ui/jobs-ui.component';
     MessageModule,
     KeyFilterModule,
     DialogModule,
-    MessagesModule
+    MessagesModule,
+    FileUploadModule,
+    InputSwitchModule
+
   ],
   providers: [SessionService, LogginGuard, AuthGuard, MessageService],
   bootstrap: [AppComponent]

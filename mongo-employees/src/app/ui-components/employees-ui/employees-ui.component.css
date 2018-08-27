@@ -1,0 +1,21 @@
+.oldlace{
+    background-color: rgba(90, 145, 228, 0.59);
+ 
+}
+
+.rounded-corners, .oldlace, .alert{
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.alert {
+    padding: 10px;
+    background-color: #f44336;
+    color: white;
+    width: 100%;
+}
+
+tr:hover{
+    background-color: rgba(151, 164, 198, 0.535) !important;
+}

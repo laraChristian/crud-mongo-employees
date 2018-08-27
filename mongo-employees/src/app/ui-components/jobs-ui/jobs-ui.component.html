@@ -31,8 +31,8 @@
               <button pButton type="button" label="Send" icon="fa fa-cloud-upload" (click)="save()" style="width: 90%" class="ui-button-raised ui-button-success"></button>
             </div>
             <div class="ui-g-12 ui-md-12 ui-lg-12">
-              <button pButton type="button" label="Delete" [disabled]="_model.disableDelete" icon="fa fa-minus-square" style="width: 90%"
-                class="ui-button-raised ui-button-danger"></button>
+              <button pButton type="button" label="Delete" [disabled]="_model.disableDelete" (click)="delete()" icon="fa fa-minus-square"
+                style="width: 90%" class="ui-button-raised ui-button-danger"></button>
             </div>
             <div class="ui-g-12 ui-md-12 ui-lg-12">
               <button pButton type="button" label="Clean" icon="fa fa-eraser" (click)="_model.clean()" style="width: 90%" class="ui-button-raised ui-button-secondary"></button>

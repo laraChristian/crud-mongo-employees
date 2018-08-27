@@ -19,7 +19,7 @@ export class LogginGuard implements CanActivate {
         if (this.loginModel.success) {
             console.log('user logged successfully');
 
-            this._router.navigate(['/users-ui']);
+            this._router.navigate(['/employees-ui']);
             return true;
         }
         console.log('user not logged');

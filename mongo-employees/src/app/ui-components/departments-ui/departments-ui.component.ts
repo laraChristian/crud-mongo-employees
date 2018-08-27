@@ -35,6 +35,7 @@ export class DepartmentsUiComponent implements OnInit {
         resp => {
           if (resp.success == true) {
             this._messageService.add({ severity: 'success', summary: 'Atention', detail: resp.message.toString(), life: 6000 });
+            this.listDepartments();
           } else {
             this._messageService.add({ severity: 'warn', summary: 'Atention', detail: resp.message.toString(), life: 6000 });
           }
@@ -47,7 +48,6 @@ export class DepartmentsUiComponent implements OnInit {
     } else {
       this._messageService.add({ life: 6000, severity: 'error', summary: 'Atention', detail: 'empty fields aren\'t allowed' });
     }
-    this.listDepartments();
   }
   //#endregion
 

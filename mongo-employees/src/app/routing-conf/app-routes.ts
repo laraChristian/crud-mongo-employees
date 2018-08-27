@@ -1,4 +1,3 @@
-import { UsersUiComponent } from "../ui-components/users-ui/users-ui.component";
 import { AuthGuard } from "../security/auth-guard";
 import { LogginGuard } from "../security/loggin-guard";
 import { LoginUiComponent } from "../ui-components/login-ui/login-ui.component";
@@ -8,10 +7,11 @@ import { CountriesUiComponent } from "../ui-components/countries-ui/countries-ui
 import { LocationsUiComponent } from "../ui-components/locations-ui/locations-ui.component";
 import { DepartmentsUiComponent } from "../ui-components/departments-ui/departments-ui.component";
 import { JobsUiComponent } from "../ui-components/jobs-ui/jobs-ui.component";
+import { EmployeesUiComponent } from "../ui-components/employees-ui/employees-ui.component";
 
 const routes: Routes = [
     { path: '', redirectTo: 'loggin', pathMatch: 'full' },
-    { path: 'users-ui', component: UsersUiComponent, canActivate: [AuthGuard] },
+    { path: 'employees-ui', component: EmployeesUiComponent, canActivate: [AuthGuard] },
     { path: 'regions-ui', component: RegionsUiComponent, canActivate: [AuthGuard] },
     { path: 'countries-ui', component: CountriesUiComponent, canActivate: [AuthGuard] },
     { path: 'locations-ui', component: LocationsUiComponent, canActivate: [AuthGuard] },
