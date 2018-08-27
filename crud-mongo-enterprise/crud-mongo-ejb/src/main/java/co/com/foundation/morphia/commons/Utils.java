@@ -9,7 +9,7 @@ public interface Utils {
 	}
 
 	enum Columns {
-		NAME("name"), JOBTITTLE("jobTittle"), JOB("job");
+		NAME("name"), JOBTITTLE("jobTittle"), JOB("job"), EMAIL("email");
 
 		private Columns(final String id) {
 			this.id = id;

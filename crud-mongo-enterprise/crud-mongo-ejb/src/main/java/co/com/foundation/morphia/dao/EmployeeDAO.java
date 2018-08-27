@@ -10,11 +10,16 @@ import javax.inject.Inject;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 
 import co.com.foundation.morphia.commons.Utils;
 import co.com.foundation.morphia.domain.Employee;
+import co.com.foundation.morphia.entities.Department;
 import co.com.foundation.morphia.entities.User;
+import co.com.foundation.morphia.exceptions.AvailabilityException;
+import co.com.foundation.morphia.exceptions.DuplicateNameException;
 import co.com.foundation.morphia.exceptions.InvalidCredentialsException;
 import co.com.foundation.morphia.exceptions.PersistenceException;
 import co.com.foundation.morphia.mapper.Mapper;
@@ -23,6 +28,9 @@ import co.com.foundation.morphia.messages.EmployeeRequest;
 import co.com.foundation.morphia.messages.LoginRequest;
 import co.com.foundation.morphia.persistence.MongoConnection;
 import co.com.foundation.morphia.types.ComponentType;
+import co.com.foundation.morphia.validators.Validator;
+import co.com.foundation.morphia.validators.annotation.Validators;
+import co.com.foundation.morphia.validators.impl.AdministrativeValidator;
 
 @Stateless(name = "EmployeeDAO")
 @LocalBean
@@ -33,6 +41,13 @@ public class EmployeeDAO implements Persistence<EmployeeRequest, Employee> {
 	@EJB
 	private MongoConnection connection;
 
+	@EJB(beanName = "CommonValidator")
+	private Validator commonValidator;
+
+	@Inject
+	@Validators(type = ComponentType.ADMNISTRATIVE)
+	private AdministrativeValidator administrativeValidator;
+
 	@Inject
 	@Mappers(type = ComponentType.EMPLOYEE)
 	private Mapper<Employee, co.com.foundation.morphia.entities.Employee> mapper;
@@ -41,6 +56,15 @@ public class EmployeeDAO implements Persistence<EmployeeRequest, Employee> {
 	public void create(EmployeeRequest request) throws PersistenceException {
 		try {
 			LOGGER.info("start -- create method");
+
+			if (commonValidator.nameAlReadyExist(null, Utils.Columns.EMAIL.getId() + "." + "email",
+					request.getEmployee().getEmail(), co.com.foundation.morphia.entities.Employee.class)) {
+				throw new DuplicateNameException("This email already exist");
+			}
+
+			connection.getDataStore().save(mapper.marshall(request.getEmployee()));
+		} catch (AvailabilityException | DuplicateNameException e) {
+			throw e;
 		} catch (Exception e) {
 			throw new PersistenceException(e.getMessage(), e);
 		} finally {
@@ -52,7 +76,10 @@ public class EmployeeDAO implements Persistence<EmployeeRequest, Employee> {
 	public List<Employee> listAll() throws PersistenceException {
 		try {
 			LOGGER.info("start -- list-all method");
-			return connection.getDataStore().find(co.com.foundation.morphia.entities.Employee.class).asList().stream()
+			return connection.getDataStore().find(co.com.foundation.morphia.entities.Employee.class)
+					.project("firstName", true).project("lastName", true).project("email", true)
+					.project("phoneNumber", true).project("hireDate", true).project("identification", true)
+					.project("manager", true).project("job", true).project("department", true).asList().stream()
 					.map(mapper::unMarshall).collect(Collectors.toList());
 		} catch (Exception e) {
 			throw new PersistenceException(e);
@@ -65,6 +92,30 @@ public class EmployeeDAO implements Persistence<EmployeeRequest, Employee> {
 	public void update(EmployeeRequest request) throws PersistenceException {
 		try {
 			LOGGER.info("start -- update method");
+			Employee employee = request.getEmployee();
+			Datastore datastore = connection.getDataStore();
+
+			ObjectId id = new ObjectId(request.getEmployee().getId());
+
+			if (administrativeValidator.isManager(Department.class, id)) {
+				Department oldDepartment = datastore.find(co.com.foundation.morphia.entities.Employee.class)
+						.project("department", true).filter("id", id).get().getDepartment();
+
+				if (!employee.getDepartmentId().equals(oldDepartment.getId().toHexString())) {
+					throw new AvailabilityException(
+							"This employee is manager to other department, should be unassigned to proceed");
+				}
+			}
+
+			if (commonValidator.nameAlReadyExist(new ObjectId(employee.getId()),
+					Utils.Columns.EMAIL.getId() + "." + "email", request.getEmployee().getEmail(),
+					co.com.foundation.morphia.entities.Employee.class)) {
+				throw new DuplicateNameException("This email already exist");
+			}
+
+			datastore.merge(mapper.marshall(employee));
+		} catch (AvailabilityException | DuplicateNameException e) {
+			throw e;
 		} catch (Exception e) {
 			throw new PersistenceException(e.getMessage(), e);
 		} finally {
@@ -73,9 +124,23 @@ public class EmployeeDAO implements Persistence<EmployeeRequest, Employee> {
 	}
 
 	@Override
-	public void delete(EmployeeRequest request) {
-		// TODO Auto-generated method stub
+	public void delete(EmployeeRequest request) throws PersistenceException {
+		try {
+			LOGGER.info("start -- delete method for:{}", request.getEmployee().getId());
+			if (administrativeValidator.isManager(Department.class, new ObjectId(request.getEmployee().getId()))
+					|| administrativeValidator.isManager(co.com.foundation.morphia.entities.Employee.class,
+							new ObjectId(request.getEmployee().getId()))) {
+				throw new AvailabilityException("This employee is manager, should be unassigned to proced");
+			}
 
+			connection.getDataStore().delete(mapper.marshall(request.getEmployee()));
+		} catch (AvailabilityException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new PersistenceException(e.getMessage(), e);
+		} finally {
+			LOGGER.info("end -- delete method for:{}", request.getEmployee().getId());
+		}
 	}
 
 	public User login(final LoginRequest request) throws PersistenceException {

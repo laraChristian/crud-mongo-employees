@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityNotFoundException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,6 +16,7 @@ import co.com.foundation.morphia.domain.Department;
 import co.com.foundation.morphia.entities.Employee;
 import co.com.foundation.morphia.exceptions.AvailabilityException;
 import co.com.foundation.morphia.exceptions.DuplicateNameException;
+import co.com.foundation.morphia.exceptions.EntityNotFoundException;
 import co.com.foundation.morphia.exceptions.PersistenceException;
 import co.com.foundation.morphia.mapper.Mapper;
 import co.com.foundation.morphia.mapper.annotation.Mappers;
@@ -102,7 +102,8 @@ public class DepartmentDAO implements Persistence<DepartmentRequest, Department>
 
 				if (!administrativeValidator.isInToDepartment(new ObjectId(department.getManagerId()),
 						new ObjectId(department.getId()))) {
-					throw new EntityNotFoundException("This employee don't belong to department");
+					throw new EntityNotFoundException(
+							"This employee don't belong to department");
 				}
 
 				if (!administrativeValidator.managerIsAvailable(new ObjectId(department.getManagerId()),

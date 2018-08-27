@@ -6,10 +6,13 @@ import javax.enterprise.context.ApplicationScoped;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 
+import co.com.foundation.morphia.commons.Utils;
 import co.com.foundation.morphia.entities.Department;
 import co.com.foundation.morphia.entities.Employee;
+import co.com.foundation.morphia.entities.Job;
 import co.com.foundation.morphia.exceptions.PersistenceException;
 import co.com.foundation.morphia.persistence.MongoConnection;
 import co.com.foundation.morphia.types.ComponentType;
@@ -58,5 +61,20 @@ public class AdministrativeValidator {
 		}
 
 	}
+
+	public <T> boolean isManager(final Class<T> collection, final ObjectId managerId) throws PersistenceException {
+		try {
+			LOGGER.info("start -- is-manager method");
+			Datastore datastore = connection.getDataStore();
+			Query<T> isManager = datastore.createQuery(collection).field("manager")
+					.equal(Employee.builder().id(managerId).build());
+			return datastore.getCount(isManager) > 0;
+		} catch (Exception e) {
+			throw new PersistenceException(e.getMessage(), e);
+		} finally {
+			LOGGER.info("end -- is-manager method");
+		}
+	}
+
 
 }

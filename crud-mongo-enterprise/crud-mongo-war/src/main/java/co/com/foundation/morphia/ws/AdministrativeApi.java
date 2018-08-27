@@ -2,7 +2,6 @@ package co.com.foundation.morphia.ws;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityNotFoundException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,6 +17,7 @@ import co.com.foundation.morphia.domain.Department;
 import co.com.foundation.morphia.domain.Job;
 import co.com.foundation.morphia.exceptions.AvailabilityException;
 import co.com.foundation.morphia.exceptions.DuplicateNameException;
+import co.com.foundation.morphia.exceptions.EntityNotFoundException;
 import co.com.foundation.morphia.exceptions.PersistenceException;
 import co.com.foundation.morphia.facade.ModulesFacade;
 import co.com.foundation.morphia.messages.DepartmentRequest;

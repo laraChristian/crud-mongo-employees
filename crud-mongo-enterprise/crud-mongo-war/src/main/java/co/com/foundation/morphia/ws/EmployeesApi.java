@@ -20,6 +20,8 @@ import co.com.foundation.morphia.messages.LoginRequest;
 import co.com.foundation.morphia.messages.LoginResponse;
 import co.com.foundation.morphia.messages.LoginResponse.LoginResponseBuilder;
 import co.com.foundation.morphia.domain.Employee;
+import co.com.foundation.morphia.exceptions.AvailabilityException;
+import co.com.foundation.morphia.exceptions.DuplicateNameException;
 import co.com.foundation.morphia.exceptions.InvalidCredentialsException;
 import co.com.foundation.morphia.exceptions.PersistenceException;
 import co.com.foundation.morphia.facade.ModulesFacade;
@@ -57,17 +59,63 @@ public class EmployeesApi {
 		}
 	}
 
+	@POST
+	@Path("/create-employee")
+	public Response create(final EmployeeRequest request) {
+		LOGGER.info("start - create method");
+		EmployeeResponseBuilder builder = EmployeeResponse.builder();
+		try {
+			if (request.isUpdate()) {
+				facade.update(request);
+				builder.message("The employee was edited successfully");
+			} else {
+				facade.create(request);
+				builder.message("The employee was created successfully");
+			}
+			return Response.ok().entity(builder.success(true).build()).build();
+		} catch (AvailabilityException | DuplicateNameException e) {
+			LOGGER.error(e.getMessage());
+			return Response.accepted().entity(builder.success(false).message(e.getMessage()).build()).build();
+		} catch (PersistenceException e) {
+			LOGGER.error(e.getMessage());
+			return Response.serverError().entity(builder.success(false).message(e.getMessage()).build()).build();
+		} finally {
+			LOGGER.info("end - create method");
+		}
+	}
+
 	@GET
 	@Path("/list-employees")
-	public Response listEmployees() {
+	public Response list() {
 		EmployeeResponseBuilder builder = EmployeeResponse.builder();
 		try {
 			LOGGER.info("start -- list-employees method");
 			return Response.ok().entity(builder.success(true).employees(facade.listAll()).build()).build();
 		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
 			return Response.ok().entity(builder.success(false).message(e.getMessage()).build()).build();
 		} finally {
 			LOGGER.info("end -- list-employees method");
+		}
+	}
+
+	@POST
+	@Path("/delete-emloyee")
+	public Response delete(final EmployeeRequest request) {
+		LOGGER.info("start -- delete method for{}", request.getEmployee().getId());
+		EmployeeResponseBuilder builder = EmployeeResponse.builder();
+		try {
+			facade.delete(request);
+			return Response.ok().entity(builder.success(true).message("The employee was deleted successfully").build())
+					.build();
+		} catch (AvailabilityException e) {
+			LOGGER.error(e.getMessage());
+			return Response.accepted().entity(builder.success(false).message(e.getMessage()).build()).build();
+		} catch (PersistenceException e) {
+			LOGGER.error(e.getMessage());
+			return Response.serverError().entity(builder.success(true).message(e.getMessage()).build()).build();
+		} finally {
+			LOGGER.info("end -- delete method for{}", request.getEmployee().getId());
 		}
 	}
 
@@ -80,6 +128,7 @@ public class EmployeesApi {
 			return Response.ok().entity(builder.success(true).employees(systemFacade.listEmployeesCmb()).build())
 					.build();
 		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
 			return Response.ok().entity(builder.success(false).message(e.getMessage()).build()).build();
 		} finally {
 			LOGGER.info("end -- list-employees method");

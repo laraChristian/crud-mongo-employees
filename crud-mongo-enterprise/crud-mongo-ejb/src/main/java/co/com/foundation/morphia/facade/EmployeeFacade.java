@@ -24,9 +24,10 @@ public class EmployeeFacade implements ModulesFacade<EmployeeRequest, Employee> 
 	@Override
 	public void create(EmployeeRequest request) throws PersistenceException {
 		try {
+			LOGGER.info("start -- create method for:{}", request.getEmployee().getFirstName());
 			persistence.create(request);
 		} finally {
-			// TODO: handle finally clause
+			LOGGER.info("end -- create method for:{}", request.getEmployee().getFirstName());
 		}
 	}
 
@@ -42,14 +43,22 @@ public class EmployeeFacade implements ModulesFacade<EmployeeRequest, Employee> 
 
 	@Override
 	public void update(EmployeeRequest request) throws PersistenceException {
-		// TODO Auto-generated method stub
-
+		try {
+			LOGGER.info("start -- update method for:{}", request.getEmployee().getId());
+			persistence.update(request);
+		} finally {
+			LOGGER.info("end -- update method for:{}", request.getEmployee().getId());
+		}
 	}
 
 	@Override
 	public void delete(EmployeeRequest request) throws PersistenceException {
-		// TODO Auto-generated method stub
-
+		try {
+			LOGGER.info("start -- delete method for:{}", request.getEmployee().getId());
+			persistence.delete(request);
+		} finally {
+			LOGGER.info("end -- delete method for:{}", request.getEmployee().getId());
+		}
 	}
 
 }

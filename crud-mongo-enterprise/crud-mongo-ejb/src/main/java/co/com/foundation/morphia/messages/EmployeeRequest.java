@@ -1,6 +1,6 @@
 package co.com.foundation.morphia.messages;
 
-import co.com.foundation.morphia.entities.Employee;
+import co.com.foundation.morphia.domain.Employee;
 import lombok.Getter;
 
 @Getter
