@@ -5,6 +5,11 @@ import { FormGroup, FormBuilder, FormControl, Validators } from "@angular/forms"
 import { ValueTransformer } from "@angular/compiler/src/util";
 import { SelectItem, MessageService } from "primeng/primeng";
 import { Commons } from "../ui-utilities/commons";
+import { Job } from "../../entities/job";
+
+export const UTILS = {
+    jobId: 'PRESIDENT'
+};
 
 export class EmployeesModel extends Commons {
 
@@ -16,8 +21,8 @@ export class EmployeesModel extends Commons {
     fieldMap: Map<String, Array<String>>;
     managersItems: SelectItem[];
     jobItems: SelectItem[];
+    jobsToCompare: Array<Job>;
     departmentItems: SelectItem[];
-    jobPresidentId: String = "5b7d7ebd15799404bae944cf";
     disableManagerDP: boolean;
 
     constructor(private _formBuilder: FormBuilder, private _messageService: MessageService) {

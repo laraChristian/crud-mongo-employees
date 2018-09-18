@@ -34,4 +34,10 @@ public class Locations {
 	public Locations() {
 		super();
 	}
+
+	public Locations(ObjectId id) {
+		super();
+		this.id = id;
+	}
+
 }

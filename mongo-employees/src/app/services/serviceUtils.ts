@@ -40,6 +40,7 @@ export class ServiceUtils {
 
     protected post<T, O>(request: T, api: string, resource: string): Observable<O> {
         console.log('start -- post method');
+        console.log(request);
         return this._http.post(BASE_API + api + resource, request, this.options).pipe(map(resp => {
             if (resp.ok === true) {
                 return resp.json();

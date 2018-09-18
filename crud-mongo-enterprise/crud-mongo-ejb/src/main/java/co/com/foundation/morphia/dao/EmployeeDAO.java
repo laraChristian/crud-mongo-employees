@@ -175,6 +175,7 @@ public class EmployeeDAO implements Persistence<EmployeeRequest, Employee> {
 					.project("firstName", true).project("lastName", true).project("job", true).asList().parallelStream()
 					.filter((entity) -> {
 						return entity.getJob().getJobTittle().equals(Utils.JOBS.PRESIDENT.toString())
+								|| entity.getJob().getJobTittle().equals(Utils.JOBS.VICEPRESIDENT.toString())
 								|| entity.getJob().getJobTittle().contains(Utils.JOBS.MANAGER.toString());
 					}).sequential().map(mapper::unMarshall).collect(Collectors.toList());
 		} catch (Exception e) {

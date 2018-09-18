@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
-import { EmployeesModel } from './employees.model';
+import { EmployeesModel, UTILS } from './employees.model';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/primeng';
 import { AdministrativesService } from '../../services/administratives.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'employees-ui',
@@ -59,6 +60,7 @@ export class EmployeesUiComponent implements OnInit {
         }
         this.listEmployees();
         this._model.clean();
+        this.listManagers();
       },
       error => {
         this._model.show('error', 'Atention', 'You shoul communicate with support');
@@ -114,6 +116,7 @@ export class EmployeesUiComponent implements OnInit {
       resp => {
         if (resp.success == true) {
           this._model.request.employee.jobId = ' ';
+          this._model.jobsToCompare = resp.jobs;
           this._model.fillSelectItem(resp.jobs, 'jobTittle', 'id', this._model.jobItems, { label: 'JOB', value: '' });
         }
       }
@@ -123,13 +126,21 @@ export class EmployeesUiComponent implements OnInit {
   onChangeJob(): void {
     console.log('start onChange')
     let ctrl = this._model.employeeForm.get('administrative').get('managerId');
-    if (this._model.request.employee.jobId.includes(this._model.jobPresidentId.toString())) {
-      ctrl.setValue('0');
-      ctrl.disable({ onlySelf: true, emitEvent: false });
-    } else {
-      ctrl.enable();
+    //If selected job is president, then manager dropdown should be disable
+    for (var job of this._model.jobsToCompare) {
+      if (job.id == this._model.request.employee.jobId) {
+        if (job.jobTittle.startsWith(UTILS.jobId)) {
+          ctrl.setValue('0');
+          ctrl.disable({ onlySelf: true, emitEvent: false });
+          break;
+        } else {
+          ctrl.enable();
+          break;
+        }
+      }
     }
   }
+
 
   private listDepartments(): void {
     this._administrativeService.listDepartments().subscribe(

@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 public interface Utils {
 
 	enum JOBS {
-		PRESIDENT, MANAGER
+		PRESIDENT, VICEPRESIDENT, MANAGER
 	}
 
 	enum Columns {

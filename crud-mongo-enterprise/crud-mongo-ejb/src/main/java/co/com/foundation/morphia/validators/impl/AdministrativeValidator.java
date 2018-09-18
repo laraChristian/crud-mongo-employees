@@ -9,10 +9,8 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 
-import co.com.foundation.morphia.commons.Utils;
 import co.com.foundation.morphia.entities.Department;
 import co.com.foundation.morphia.entities.Employee;
-import co.com.foundation.morphia.entities.Job;
 import co.com.foundation.morphia.exceptions.PersistenceException;
 import co.com.foundation.morphia.persistence.MongoConnection;
 import co.com.foundation.morphia.types.ComponentType;

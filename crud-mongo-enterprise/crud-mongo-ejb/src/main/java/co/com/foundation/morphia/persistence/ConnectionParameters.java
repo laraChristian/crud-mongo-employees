@@ -12,7 +12,7 @@ public interface ConnectionParameters {
 
 	String HOST = "127.0.0.1";
 	Integer PORT = 27017;
-	String DBNAME = "hr-employees";
+	String DBNAME = "jsti-employees";
 	Class<?> ENTITIES[] = { Region.class, Country.class, Locations.class, Department.class, Job.class, Employee.class,
 			Email.class };
 }
